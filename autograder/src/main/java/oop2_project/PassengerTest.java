@@ -1,5 +1,4 @@
-package main.java.oop2_project;
-
+package oop2_project;
  
 import org.junit.Before;
 import static org.junit.Assert.*;
@@ -25,9 +24,17 @@ public class PassengerTest {
     {
         try
         {
+            // checks if student followed correct variable naming
             Field field = passenger.getClass().getDeclaredField("passportNumber");
+            
+            // checks for correct variable type
+            Class<?> fieldType = field.getType();
+            assertEquals(String.class, fieldType);
+            
+            //checks if private
             assertTrue(java.lang.reflect.Modifier.isPrivate(field.getModifiers()));
         
+            // checks if is an instance variable
             int modifiers = field.getModifiers();
             assertTrue(!java.lang.reflect.Modifier.isStatic(modifiers));   
         }
@@ -45,6 +52,9 @@ public class PassengerTest {
         {
             Field field = passenger.getClass().getDeclaredField("flightNo");
             assertTrue(java.lang.reflect.Modifier.isPrivate(field.getModifiers()));
+            
+            Class<?> fieldType = field.getType();
+            assertEquals(String.class, fieldType);
         
             int modifiers = field.getModifiers();
             assertTrue(!java.lang.reflect.Modifier.isStatic(modifiers));   
@@ -62,6 +72,9 @@ public class PassengerTest {
         {
             Field field = passenger.getClass().getDeclaredField("firstName");
             assertTrue(java.lang.reflect.Modifier.isPrivate(field.getModifiers()));
+            
+            Class<?> fieldType = field.getType();
+            assertEquals(String.class, fieldType);
         
             int modifiers = field.getModifiers();
             assertTrue(!java.lang.reflect.Modifier.isStatic(modifiers));
@@ -79,6 +92,9 @@ public class PassengerTest {
         {
             Field field = passenger.getClass().getDeclaredField("lastName");
             assertTrue(java.lang.reflect.Modifier.isPrivate(field.getModifiers()));
+            
+            Class<?> fieldType = field.getType();
+            assertEquals(String.class, fieldType);
         
             int modifiers = field.getModifiers();
             assertTrue(!java.lang.reflect.Modifier.isStatic(modifiers));
@@ -96,6 +112,9 @@ public class PassengerTest {
         {
             Field field = passenger.getClass().getDeclaredField("numLuggage");
             assertTrue(java.lang.reflect.Modifier.isPrivate(field.getModifiers()));
+            
+            Class<?> fieldType = field.getType();
+            assertEquals(int.class, fieldType);
         
             int modifiers = field.getModifiers();
             assertTrue(!java.lang.reflect.Modifier.isStatic(modifiers));
@@ -113,6 +132,9 @@ public class PassengerTest {
         {
             Field field = passenger.getClass().getDeclaredField("cabinClass");
             assertTrue(java.lang.reflect.Modifier.isPrivate(field.getModifiers()));
+            
+            Class<?> fieldType = field.getType();
+            assertEquals(char.class, fieldType);
         
             int modifiers = field.getModifiers();
             assertTrue(!java.lang.reflect.Modifier.isStatic(modifiers));
@@ -138,5 +160,14 @@ public class PassengerTest {
         assertTrue(cabinClass == 'F' || cabinClass == 'B' || cabinClass == 'P' || cabinClass == 'E');
     }
     
+    @Test
+    public void testToStringFormat() 
+    {
+        String expected = "PP NO. " + passportNumber + " NAME: " + firstName.charAt(0) + "." + lastName.toUpperCase()
+                + " NUMLUGGAGE: " + passenger.getNumLuggage() + " CLASS: " + passenger.getCabinClass() + "\n";
+    
+        assertEquals(expected, passenger.toString());
+    }
 }
+
 
