@@ -233,8 +233,6 @@ public class FlightTest
             }
         }
         
-        System.out.println(expected);
-        System.out.println(flight.printLuggageManifest());
         assertEquals(expected, flight.printLuggageManifest());
     }    
     
@@ -245,6 +243,18 @@ public class FlightTest
         assertEquals(flight.getAllowedLuggage('B'), 2);
         assertEquals(flight.getAllowedLuggage('P'), 1);
         assertEquals(flight.getAllowedLuggage('E'), 0);
+        
+        Boolean p = false;
+        
+        try
+        {
+            Class<?> clas = flight.getClass();
+            Method method = clas.getDeclaredMethod("getAllowedLuggage", char.class);
+            p = Modifier.isStatic(method.getModifiers());
+        }
+        catch (NoSuchMethodException e){}
+        
+        assertTrue(p);
     }
 
     @Test
@@ -255,4 +265,5 @@ public class FlightTest
         assertEquals(expected, flight.toString());
     }
 }
+
 

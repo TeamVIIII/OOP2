@@ -1,7 +1,5 @@
 package oop2_project;
 
- 
- 
 import org.junit.After;
 import org.junit.Before;
 import static org.junit.Assert.*;
@@ -20,7 +18,7 @@ public class LuggageSlipTest {
     @Before
     public void setup()
     {
-        passportNumber = "AB12345";
+        this.passportNumber = "AB12345";
         String firstName = "John";
         String lastName = "Doe";
         String flightNo = "AA123";
@@ -65,7 +63,7 @@ public class LuggageSlipTest {
             field.setAccessible(true);
             field.set(null, 1); // Reset the static variable to its original state (1).
         } catch (Exception e) {
-            // Handle exceptions
+            
         }
     }
 
@@ -116,8 +114,6 @@ public class LuggageSlipTest {
             String s = slip1.getLuggageSlipID();
             
             assertNotNull(s);
-            System.out.println("Actual: " + s);
-            System.out.println("Expected: " + expected);
             assertEquals(s, expected);
         }
         catch(NoSuchFieldException e)
@@ -163,6 +159,4 @@ public class LuggageSlipTest {
     {
         assertTrue(slip1.hasOwner(passportNumber));
     }
-
 }
-
