@@ -15,7 +15,7 @@ public class LuggageSlipTest {
     private Passenger owner;
     private Flight flight;
     private String label;
-    String passportNumber;
+    private String passportNumber;
 
     @Before
     public void setup()

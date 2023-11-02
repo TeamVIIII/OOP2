@@ -100,7 +100,8 @@ public class LuggageManifestTest
         int numLuggage = passenger.getNumLuggage();
         int excessPieces = passenger.getNumLuggage() - allowedLuggage;
         String result = luggageManifest.addLuggage(passenger, flight);
-        
+        String expected = "";
+
         try
         {
             Class<?> clas = luggageManifest.getClass();
@@ -110,8 +111,7 @@ public class LuggageManifestTest
             try
             {
                 double excessCost = (double) method.invoke(luggageManifest, numLuggage, allowedLuggage);
-                String expected = "";
-
+                
                 if(passenger.getNumLuggage() == 0)
                     expected = "No Luggage to add.\n";
                 else if (excessPieces > 0)
