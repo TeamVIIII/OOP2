@@ -4,8 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import static org.junit.Assert.*;
 import org.junit.Test;
-
-import java.beans.Transient;
 import java.lang.reflect.*;
 import java.time.LocalDateTime;
 
@@ -265,5 +263,3 @@ public class FlightTest
         assertEquals(expected, flight.toString());
     }
 }
-
-
