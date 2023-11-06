@@ -14,7 +14,8 @@ public class Copier
         Path destinationDirectory = Paths.get(DestinationOfFile);
         Path destinationFilePath = destinationDirectory.resolve(sourcePath.getFileName());
 
-        try {
+        try 
+        {
             Files.copy(sourcePath, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
             return true;
         } catch (IOException e) {
@@ -23,5 +24,4 @@ public class Copier
         }
         return false;
     }
-    
 }
