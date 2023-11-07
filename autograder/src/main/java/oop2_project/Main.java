@@ -7,7 +7,7 @@ public class Main {
         UnzipUtility unzipper = new UnzipUtility();
         
         try {
-            String destination = unzipper.unzip("C:\\Users\\Person\\Downloads\\Test(2).zip", "C:\\Users\\Person\\Music");
+            String destination = unzipper.unzip("/Users/jerrellejohnson/Desktop/tesing/LuggageManagementSystem.zip");
             System.out.println("Unzipped to: " + destination);
         } catch (IOException e) {
             e.printStackTrace();
