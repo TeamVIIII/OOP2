@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.zip.*;
 
 public class UnzipUtility {
-    public String unzip(String zipFilePath) throws IOException {
+    public String unzip(String zipFilePath){
         File zipFile = new File(zipFilePath);
         String destDirectory = zipFile.getParent();
         String zipFileName = zipFile.getName();
@@ -26,6 +26,12 @@ public class UnzipUtility {
                 entry = zipIn.getNextEntry();
             }
         }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+            
+        // System.out.println(destDirectory + File.separator + zipFileName.replace(".zip", ""));
         return destDirectory + File.separator + zipFileName.replace(".zip", "");
     }
 
