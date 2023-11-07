@@ -11,10 +11,10 @@ public class RunAllTests extends RunTest
     public List<Result> runAll()
     {
         List<Class<?>> testClasses = new ArrayList<>();
-        testClasses.add(FlightTest.class);
         testClasses.add(PassengerTest.class);
         testClasses.add(LuggageSlipTest.class);
         testClasses.add(LuggageManifestTest.class);
+        testClasses.add(FlightTest.class);
         
         for(Class<?> testname: testClasses)
         {

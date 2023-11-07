@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public abstract class Copier 
 {
-    protected void copyTest(String testFilePath, String submissionFilePath)
+    protected void copyFile(String testFilePath, String submissionFilePath)
     {
         try 
         {

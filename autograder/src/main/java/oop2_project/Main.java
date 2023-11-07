@@ -1,17 +1,20 @@
 package oop2_project;
 
-import java.io.IOException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submissions.zip";
+
         UnzipUtility unzipper = new UnzipUtility();
         
-        try {
-            String destination = unzipper.unzip("C:\\Users\\Person\\Downloads\\Test(2).zip", "C:\\Users\\Person\\Music");
-            System.out.println("Unzipped to: " + destination);
-        } catch (IOException e) {
-            e.printStackTrace();
-            //System.out.println(e);
-        }
+        String unzippedFolder = unzipper.unzip(zipFile);
+
+        GetUnzippedPaths zippedSubmissionsPaths = new GetUnzippedPaths();
+        List<String> filepaths = zippedSubmissionsPaths.traversefolder(unzippedFolder);
+
+        for(String path : filepaths)
+            System.out.println(path);
+
     }
 }

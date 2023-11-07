@@ -3,13 +3,11 @@ import java.io.*;
 import java.util.zip.*;
 
 public class UnzipUtility {
-
-    public String unzip(String zipFilePath, String destDirectory) throws IOException {
-        File destDir = new File(destDirectory);
-        if (!destDir.exists()) {
-            destDir.mkdir();
-        }
-        
+    public String unzip(String zipFilePath){
+        File zipFile = new File(zipFilePath);
+        String destDirectory = zipFile.getParent();
+        String zipFileName = zipFile.getName();
+    
         try (ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath))) {
             ZipEntry entry = zipIn.getNextEntry();
             while (entry != null) {
@@ -18,7 +16,7 @@ public class UnzipUtility {
                     extractFile(zipIn, filePath);
                     if (filePath.endsWith(".zip")) {
                         // If the file is a zip file, recursively unzip it
-                        unzip(filePath, filePath.substring(0, filePath.length() - 4));
+                        unzip(filePath);
                     }
                 } else {
                     File dir = new File(filePath);
@@ -28,7 +26,13 @@ public class UnzipUtility {
                 entry = zipIn.getNextEntry();
             }
         }
-        return destDirectory;
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+            
+        // System.out.println(destDirectory + File.separator + zipFileName.replace(".zip", ""));
+        return destDirectory + File.separator + zipFileName.replace(".zip", "");
     }
 
     private void extractFile(ZipInputStream zipIn, String filePath) throws IOException {
@@ -45,6 +49,4 @@ public class UnzipUtility {
             }
         }
     }
-    
-    
 }

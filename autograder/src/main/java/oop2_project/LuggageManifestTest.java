@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import java.lang.reflect.*;
 import java.time.LocalDateTime;
-import java.util.jar.Manifest;
 import java.util.ArrayList;
 
 public class LuggageManifestTest 
@@ -249,4 +248,3 @@ public class LuggageManifestTest
         assertEquals(expected, luggageManifest.toString());
     }    
 }
-
