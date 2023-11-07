@@ -1,27 +1,40 @@
 package oop2_project;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.Files;
 
-public class Copier 
+public abstract class Copier 
 {
-    public boolean copyFile(String fileToCopy, String DestinationOfFile)
+    protected void copyTest(String testFilePath, String submissionFilePath)
     {
-        Path sourcePath = Paths.get(fileToCopy);
-        Path destinationDirectory = Paths.get(DestinationOfFile);
-        Path destinationFilePath = destinationDirectory.resolve(sourcePath.getFileName());
-
         try 
         {
-            Files.copy(sourcePath, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
-            return true;
-        } catch (IOException e) {
+            BufferedReader reader = new BufferedReader(new FileReader(testFilePath));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(submissionFilePath));
+
+            // Write the package declaration at the top
+            writer.write("package oop2_project;");
+            writer.newLine();
+            writer.newLine();
+
+            // Copies the rest of the original .java file
+            String line;
+            while ((line = reader.readLine()) != null) 
+            {
+                writer.write(line);
+                writer.newLine();
+            }
+
+            reader.close();
+            writer.close();
+        } 
+        catch (IOException e) 
+        {
             e.printStackTrace();
-            System.err.println("Error copying the file.");
         }
-        return false;
     }
 }
+
