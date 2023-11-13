@@ -118,8 +118,7 @@ public class LuggageSlipTest {
         catch(NoSuchFieldException e)
         {
             
-        }
-            
+        }   
     }
        
     @Test
@@ -157,5 +156,17 @@ public class LuggageSlipTest {
     public void testHasOwner()
     {
         assertTrue(slip1.hasOwner(passportNumber));
+    }
+
+    @Test
+    public void testToStringFormat()
+    {
+        String expectedNoSlip = slip1.getLuggageSlipID() + " " + owner.toString() + "";
+
+        String expectedWithSlip = slip1.getLuggageSlipID() + " " + owner.toString() + "";
+        
+
+        assertEquals(expectedNoSlip, slip1.toString());
+        assertEquals(expectedWithSlip, slip1.toString());
     }
 }

@@ -22,7 +22,7 @@ public class Compiler{
 
         try {
             ProcessBuilder compiler = new ProcessBuilder(compileCommands);
-            compiler.directory(new File(folderPath));
+            compiler.directory(new File("src/main/java/oop2_project"));
             Process compileProcess = compiler.start();
             int compileExitCode = compileProcess.waitFor();
 

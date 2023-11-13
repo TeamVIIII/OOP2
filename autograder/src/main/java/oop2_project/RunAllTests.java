@@ -7,15 +7,21 @@ import org.junit.runner.Result;
 
 public class RunAllTests extends RunTest
 {
-    List<Result> results = new ArrayList<>();
-    public List<Result> runAll()
+    
+    private final List<Class<?>> testClasses = new ArrayList<>();
+
+    public RunAllTests()
     {
-        List<Class<?>> testClasses = new ArrayList<>();
         testClasses.add(PassengerTest.class);
         testClasses.add(LuggageSlipTest.class);
         testClasses.add(LuggageManifestTest.class);
         testClasses.add(FlightTest.class);
-        
+    }
+
+    public final List<Result> runAll()
+    {   
+        List<Result> results = new ArrayList<>();
+
         for(Class<?> testname: testClasses)
         {
             org.junit.runner.Result result = runTest(testname);

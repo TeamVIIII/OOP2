@@ -5,16 +5,18 @@ import java.util.List;
 
 public class CopyAll extends Copier
 {
-    public void copy(String folderPath)
+    public void copyAll(String folderPath)
     {
-        List<String> destinations = new ArrayList<>();
-        List<String> sources = new ArrayList<>();
+        List<String> destinations = new ArrayList<>(4);
+        List<String> sources = new ArrayList<>(4);
         
-        String thisFolder = "/Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/";
-        destinations.add(thisFolder + "Passenger.java");
-        destinations.add(thisFolder + "LuggageSlip.java");
-        destinations.add(thisFolder + "LuggageManifest.java");
-        destinations.add(thisFolder + "Flight.java");
+        
+        
+        String thisFolder = "src/main/java/oop2_project";
+        destinations.add(thisFolder + "/Passenger.java");
+        destinations.add(thisFolder + "/LuggageSlip.java");
+        destinations.add(thisFolder + "/LuggageManifest.java");
+        destinations.add(thisFolder + "/Flight.java");
 
         sources.add(folderPath + "/Passenger.java");
         sources.add(folderPath + "/LuggageSlip.java");

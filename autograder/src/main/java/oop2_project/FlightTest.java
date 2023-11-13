@@ -130,12 +130,20 @@ public class FlightTest
         assertEquals(origin, flight.getOrigin());
         assertEquals(flightDate, flight.getFlightDate());
         
-        LuggageManifest m = flight.getManifest();
-        assertNotNull(m);
+        try
+        {
+            Field field = flight.getClass().getDeclaredField("manifest");
+            field.setAccessible(true);
+
+            assertNotNull(field);
+        }
+        catch(NoSuchFieldException e){
+            System.out.println("manifest in flight class not found in testConstructor \n" + e);
+        }
     }
 
     @Test
-    public void testCheckInLuggage() throws IllegalAccessException
+    public void testCheckInLuggage() throws IllegalArgumentException, IllegalAccessException
     {
         Passenger p = new Passenger(passportNumber, firstName, lastName, "BWA1234");
         String result = flight.checkInLuggage(p);
@@ -147,8 +155,19 @@ public class FlightTest
         int allowedLuggage = flight.getAllowedLuggage(passenger.getCabinClass());
         int numLuggage = passenger.getNumLuggage();
         int excessPieces = passenger.getNumLuggage() - allowedLuggage;
-        manifest = flight.getManifest();
         
+        try
+        {
+            Field field = Flight.class.getDeclaredField("manifest");
+            field.setAccessible(true);
+            manifest = (LuggageManifest) field.get(flight);
+
+        }
+        catch(NoSuchFieldException e) 
+        {
+            System.out.println("manifest error in testcheckInLuggage \n" + e);
+        }
+
         try
         {
             Class<?> clas = manifest.getClass();
@@ -181,7 +200,20 @@ public class FlightTest
     {
         int numLuggages = passenger.getNumLuggage();
         String expected = "LUGGAGE MANIFEST:\n";
-        manifest = flight.getManifest();
+        
+        try
+        {
+            Field field = Flight.class.getDeclaredField("manifest");
+            field.setAccessible(true);
+            manifest = (LuggageManifest) field.get(flight);
+
+        }
+        catch(NoSuchFieldException e) 
+        {
+            System.out.println("manifest error in testcheckInLuggage \n" + e);
+        }
+
+
         String x = manifest.addLuggage(passenger,flight);
         String result = manifest.toString();
         
