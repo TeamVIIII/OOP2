@@ -1,5 +1,6 @@
 package oop2_project;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.runner.Result;
 
@@ -12,8 +13,8 @@ import org.junit.runner.Result;
 
 public class Main {
     public static void main(String[] args) {
-        String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submissions.zip";
-
+        String zipFile = "C:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1.zip";
+        String path = "C:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1\\Zackary_Rampersad_816031173.pdf";
         UnzipUtility unzipper = new UnzipUtility();
         GetUnzippedPaths zippedSubmissionsPaths = new GetUnzippedPaths();
         CopyAll copier = new CopyAll();
@@ -22,7 +23,9 @@ public class Main {
         String unzippedFolder = unzipper.unzip(zipFile);
 
         // ArrayList<Report> idk = new ArrayList<>();
-
+        List<String[]> testCases = new ArrayList<>();
+        ReportGeneratorTemplate pdf = new PDFGenerator(testCases);
+        pdf.generatePDF(path);
         
         List<String> unzippedSubmissionFoldersPath = zippedSubmissionsPaths.traversefolder(unzippedFolder);
         for(String s : unzippedSubmissionFoldersPath)
@@ -45,11 +48,13 @@ public class Main {
             overallReport.addReport(luggageManifestReport);
             overallReport.addReport(flightReport);
 
+            
+
             // /Users/jerrellejohnson/Desktop/tesing/submissions/Zachary_Rampersad_816031173_A1/Zachary_Rampersad_816031173_A1.pdf
             // System
             // System.out.println("Recommendations: " + overallReport.recommendationsToString());
-            
-
+            // "C:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1.zip"
+            // c:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1
         }
     }
 }

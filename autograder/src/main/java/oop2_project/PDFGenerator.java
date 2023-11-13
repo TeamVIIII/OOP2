@@ -1,15 +1,29 @@
 package oop2_project;
 
+import java.io.FileOutputStream;
 import java.util.List;
 import com.itextpdf.text.Document;  
 import com.itextpdf.text.DocumentException;  
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class PDFGenerator extends ReportGeneratorTemplate{
     private final List<String[]> testCases;
 
     public PDFGenerator(List<String[]> testCases){
         this.testCases = testCases;
+    }
+
+    protected void generate(String outputPath){
+        try{
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(outputPath));
+            document.open();
+            createTable(document);
+            document.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     protected void createTable(Document document) {
