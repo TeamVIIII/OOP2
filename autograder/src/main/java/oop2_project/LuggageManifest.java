@@ -1,87 +1,83 @@
 package oop2_project;
 
+// Student ID: 816031173
+// Student Name: Zachary Rampersad
+
 import java.util.ArrayList;
-//816029808
 
-import java.util.Iterator;
-
-public class LuggageManifest 
-{
-  private ArrayList<LuggageSlip> slips;
-
-  public LuggageManifest() 
-  {
-    slips = new ArrayList<LuggageSlip>();
-  }
-
-  public String addLuggage(Passenger p, Flight f) 
-  {
-    int allowedLuggage = f.getAllowedLuggage(p.getCabinClass());
-    int numLuggage = p.getNumLuggage();
-    int excessPieces = numLuggage - allowedLuggage;
-    double cost = getExcessLuggageCost(numLuggage, allowedLuggage);
+public class LuggageManifest{
+    private ArrayList<LuggageSlip> slips;
     
-    if (numLuggage == 0)
-      return "No Luggage to add.\n";
-    
-    else if (excessPieces > 0) 
-    {
-      for (int i = 1; i <= numLuggage; i++) 
-      {
-        String exCost = Double.toString(cost);
-        slips.add(new LuggageSlip(p, f, exCost));
-      }
-      
-      return "Pieces Added: (" + numLuggage + "). Excess Cost: $" + cost + "\n";
-    } 
-    else if (excessPieces <= 0) 
-    {
-      for (int i = 1; i <= numLuggage; i++) 
-      {
-        slips.add(new LuggageSlip(p, f));
-      }
-      
-      return "Pieces Added: (" + numLuggage + "). Excess Cost: $0\n";
-    } 
-          
-    return "";
-  }
-
-  private double getExcessLuggageCost(int numPieces, int numAllowedPieces) 
-  {
-    int excessPieces = numPieces - numAllowedPieces;
-    
-    if(excessPieces > 0)
-        return excessPieces * 35;
-    
-    return 0;
-  }
-
-  public String getExcessLuggageCostByPassenger(String passportNumber) {
-    Iterator<LuggageSlip> iter = this.slips.iterator();
-    
-    while (iter.hasNext()) 
-    {
-      LuggageSlip l = iter.next();
-      Passenger p = l.getOwner();
-      String ppNumber = p.getPassportNumber();
-
-      if (ppNumber.equals(passportNumber))
-        return l.getLabel();
-    }
-
-    String str = "No Cost";
-    return str;
-  }
-
-  public String toString() {
-    String str = "LUGGAGE MANIFEST:\n";
-    
-    for (LuggageSlip slip : slips) 
-    {
-      str = str + slip.toString() + "\n";
+    public LuggageManifest(){
+        slips = new ArrayList<LuggageSlip>();
     }
     
-    return str.toString();
-  }
+    public ArrayList<LuggageSlip> getSlips(){
+        return slips;
+    }
+    
+    public String addLuggage(Passenger p, Flight f){
+        String label = String.valueOf(getExcessLuggageCost(p.getNumLuggage(),
+        f.getAllowedLuggage(p.getCabinClass())));
+        
+        if(p.getNumLuggage() == 0){
+            LuggageSlip s = new LuggageSlip(p,f);
+        
+            slips.add(s);
+        
+            return p.toString()+"\nNo Luggage to add.";
+        }
+        else if (label.equals("0.00")){
+            LuggageSlip s = new LuggageSlip(p,f);
+            
+            slips.add(s);
+            
+            return p.toString()+"\n"+"Pieces Addeded: ("+
+            p.getNumLuggage()+") Excess Cost: $"+label;
+        }
+        else{
+            LuggageSlip s = new LuggageSlip(p,f,label);
+            
+            slips.add(s);
+            
+            return p.toString()+"\n"+"Pieces Addeded: ("+
+            p.getNumLuggage()+ ") Excess Cost: $"+label;
+        }
+    }
+    
+    public double getExcessLuggageCost(int numPieces, int numAllowedPieces){
+        if(numPieces>numAllowedPieces)   
+            return ((numPieces - numAllowedPieces)*35.00);
+        else
+            return 0.00;
+    }
+    
+    public String getExcessLuggageCostByPassenger(String passportNumber){
+        for(LuggageSlip s : slips){
+            
+            if(passportNumber.equals(s.getOwner().getPassportNumber())){
+                if(s.getLabel().equals(""))
+                    return "No Cost";
+                else
+                    return s.getLabel();
+            }
+        
+        }
+        
+        return "No Cost";
+    }
+    
+    public String toString(){
+        String aggregate = "LUGGAGE MANIFEST:\n";
+        
+        // for(int i = 0; i<slips.size(); i++){
+            // LuggageSlip s = slips.get(i);
+            // aggregate += s.toString();
+        // }
+        
+        for(LuggageSlip s : slips)
+            aggregate += s.toString();
+        return aggregate;
+    }
+    
 }
