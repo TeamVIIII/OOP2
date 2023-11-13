@@ -16,10 +16,4 @@ public class FileNameExtractor {
             return fileName;
         }
     }
-
-    public static void main(String[] args) {
-        String filePath = "/Users/jerrellejohnson/Desktop/tesing/submissions/LuggageManagementSystem";
-        String extractedFileName = extractFileName(filePath);
-        System.out.println("Extracted file name: " + extractedFileName);
-    }
 }

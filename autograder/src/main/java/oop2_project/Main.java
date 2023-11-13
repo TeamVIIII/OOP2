@@ -14,7 +14,6 @@ import org.junit.runner.Result;
 public class Main {
     public static void main(String[] args) {
         String zipFile = "C:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1.zip";
-        String path = "C:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1\\Zackary_Rampersad_816031173.pdf";
         UnzipUtility unzipper = new UnzipUtility();
         GetUnzippedPaths zippedSubmissionsPaths = new GetUnzippedPaths();
         CopyAll copier = new CopyAll();
@@ -22,11 +21,20 @@ public class Main {
         RunAllTests executer = new RunAllTests();
         String unzippedFolder = unzipper.unzip(zipFile);
 
+        //====================================================================
+        String fileName = FileNameExtractor.extractFileName(unzippedFolder);
+
         // ArrayList<Report> idk = new ArrayList<>();
         List<String[]> testCases = new ArrayList<>();
-        ReportGeneratorTemplate pdf = new PDFGenerator(testCases);
-        pdf.generatePDF(path);
-        
+        List<String[]> description = new ArrayList<>();
+        testCases.add(new String[]{"Passenger", "8", "7"});
+        testCases.add(new String[]{"Flight", "12", "10"});
+        description.add(new String[]{"Checking the desccription text"});
+        description.add(new String[]{"Checking the desccription text #2"});
+        ReportGeneratorTemplate pdf = new PDFGenerator(testCases, description);
+        pdf.generatePDF(unzippedFolder + "\\" + fileName + ".pdf");
+        //====================================================================
+
         List<String> unzippedSubmissionFoldersPath = zippedSubmissionsPaths.traversefolder(unzippedFolder);
         for(String s : unzippedSubmissionFoldersPath)
         {
