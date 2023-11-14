@@ -4,12 +4,12 @@ import com.itextpdf.text.Document;
 
 public abstract class ReportGeneratorTemplate{
     
-    public final void generatePDF(String outputPath) {
+    public final void generatePDF(String outputPath ) {
         generate(outputPath);
     }
 
     protected abstract void generate(String outputPath);
     protected abstract void createTable(Document document);
-    protected abstract void createDescription(Document document);
+    // protected abstract void createDescription(Document document);
     
 }

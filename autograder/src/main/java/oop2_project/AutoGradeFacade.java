@@ -43,9 +43,12 @@ public class AutoGradeFacade implements Facade
         return overallReport;
     }
 
-    public void generatePDf(OverallReport report)
+    public void generatePDf(OverallReport report, String folderpath)
     {
-        //code for generating pdf
+        String fileName = FileNameExtractor.extractFileName(folderpath);
+        ReportGeneratorTemplate pdf = new PDFGenerator(report);
+            
+        pdf.generatePDF(folderpath + "/" + fileName + ".pdf");
     }
 
     public boolean isValidZipFile(String submissionsZippedPath) 
