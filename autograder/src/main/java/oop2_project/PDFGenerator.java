@@ -40,8 +40,6 @@ public class PDFGenerator extends ReportGeneratorTemplate{
         // Set table alignment
         table.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 
-        //Table table = new Table(3); // create a table with 3 columns
-
         // Add table headers
         table.addCell("Class");
         table.addCell("Total");
@@ -54,6 +52,7 @@ public class PDFGenerator extends ReportGeneratorTemplate{
                 table.addCell(new Paragraph(cell, getCellFont()));
             }
         }
+        
         try {
             document.add(table);
         } catch (DocumentException e) {
@@ -66,19 +65,12 @@ public class PDFGenerator extends ReportGeneratorTemplate{
         // Set paragraph alignment
         paragraph.setAlignment(Element.ALIGN_JUSTIFIED);
 
-        /* paragraph.add("This is a description.");
-        paragraph.add(Chunk.NEWLINE);
-        paragraph.add("More description text here.");
-        paragraph.add(Chunk.NEWLINE);
-        paragraph.add("Even more description text.");
- */
         for(String[] improvemets : improvementText){
             for(String text : improvemets){
                 paragraph.add(Chunk.NEWLINE);
                 paragraph.add(text);
             }
         }
-
 
         try {
             document.add(paragraph);
