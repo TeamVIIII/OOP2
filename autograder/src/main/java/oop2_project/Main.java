@@ -12,7 +12,7 @@ import org.junit.runner.Result;
 
 public class Main {
     public static void main(String[] args) {
-        String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submissions.zip";
+        String zipFile = "C:\\Users\\kiran\\Downloads\\submissions.zip";
 
         UnzipUtility unzipper = new UnzipUtility();
         GetUnzippedPaths zippedSubmissionsPaths = new GetUnzippedPaths();
