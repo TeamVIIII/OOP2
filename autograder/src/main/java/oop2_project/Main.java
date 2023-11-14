@@ -1,46 +1,29 @@
 package oop2_project;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.runner.Result;
-
-/*
- get the name of folder
- attach the name of the folder to .pdf eg(/Users/jerrellejohnson/Desktop/tesing/submissions/LuggageManagementSystem/8160299808A1COMP2603.pdf)
- create in the pdf in this /Users/jerrellejohnson/Desktop/tesing/submissions/8160299808A1COMP2603
- */
-
 
 public class Main {
     public static void main(String[] args) {
-        String zipFile = "C:\\Users\\jmitc\\Downloads\\submissions.zip";
+        String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submissions.zip";
         UnzipUtility unzipper = new UnzipUtility();
         GetUnzippedPaths zippedSubmissionsPaths = new GetUnzippedPaths();
         CopyAll copier = new CopyAll();
         Compiler compiler = new Compiler();
         RunAllTests executer = new RunAllTests();
         String unzippedFolder = unzipper.unzip(zipFile);
-        String fileName = FileNameExtractor.extractFileName(unzippedFolder);
-
-
-        //System.out.println(unzippedFolder);
-        //====================================================================
-
-        // ArrayList<Report> idk = new ArrayList<>();
-        /* 
-        
-         *///====================================================================
         
        List<String> unzippedSubmissionFoldersPath = zippedSubmissionsPaths.traversefolder(unzippedFolder);
-        //for(String s : unzippedSubmissionFoldersPath)
-        //{ 
-            //System.out.println(s);
+        for(String s : unzippedSubmissionFoldersPath)
+        { 
+            System.out.println(s);
+            copier.copyAll(s);
+            compiler.compileTest(s); 
 
 
-            System.out.println(unzippedSubmissionFoldersPath.get(1));
-            copier.copyAll(unzippedSubmissionFoldersPath.get(1));
-            compiler.compileTest(unzippedSubmissionFoldersPath.get(1)); 
+            // System.out.println(unzippedSubmissionFoldersPath.get(1));
+            // copier.copyAll(unzippedSubmissionFoldersPath.get(1));
+            // compiler.compileTest(unzippedSubmissionFoldersPath.get(1)); 
 
             List<Result> results = executer.runAll(); 
 
@@ -56,27 +39,6 @@ public class Main {
             overallReport.addReport(luggageManifestReport);
             overallReport.addReport(flightReport);
 
-            List<String[]> testCases = new ArrayList<>();
-            List<String[]> description = new ArrayList<>();
-            //testCases.add(new String[]{"Passenger", "8", "7"});
-            //testCases.add(new String[]{"Flight", "12", "10"});
-            //description.add(new String[]{"Checking the desccription text"});
-            //description.add(new String[]{"Checking the desccription text #2"});
-            ReportGeneratorTemplate pdf = new PDFGenerator(testCases, description);
-            pdf.generatePDF(unzippedFolder + "\\" + fileName + ".pdf");
-
-            
-
-            // /Users/jerrellejohnson/Desktop/tesing/submissions/Zachary_Rampersad_816031173_A1/Zachary_Rampersad_816031173_A1.pdf
-            // System
-            // System.out.println("Recommendations: " + overallReport.recommendationsToString());
-            // "C:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1.zip"
-            // C:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1
-            // "C:\\Users\\jmitc\\Downloads\\submissions.zip"
-            //"C:\\Users\\jmitc\\Downloads\\submissions.zip"
-        //}
- 
-        
-
+        }
     }
 }

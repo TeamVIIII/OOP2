@@ -2,8 +2,6 @@ package oop2_project;
 
 import java.io.FileOutputStream;
 import java.util.List;
-
-
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;  
 import com.itextpdf.text.DocumentException;
@@ -19,6 +17,20 @@ public class PDFGenerator extends ReportGeneratorTemplate{
 
     public PDFGenerator(List<String[]> testCases, List<String[]> improvementText){
         this.testCases = testCases;
+        this.improvementText = improvementText;
+    }
+
+    protected void generate(String outputPath){
+        try{
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(outputPath));
+            document.open();
+            createTable(document);
+            createDescription(document);
+            document.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     protected void createTable(Document document) {
