@@ -55,7 +55,6 @@ public class OverallReport implements Report
         {
             int reportMark = r.getAcquiredMark();
             acquired += reportMark;
-            System.out.println(reportMark);
         }
 
         return acquired+5;
