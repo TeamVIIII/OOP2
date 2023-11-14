@@ -6,6 +6,7 @@ import org.junit.runner.Result;
 public class PassengerReport extends AbstractReport
 {
 
+
     public PassengerReport(Result r)
     {
         super(r, 16);

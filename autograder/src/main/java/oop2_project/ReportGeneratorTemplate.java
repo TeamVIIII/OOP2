@@ -4,7 +4,7 @@ import com.itextpdf.text.Document;
 
 public abstract class ReportGeneratorTemplate{
     
-    public final void generatePDF(String outputPath) {
+    public final void generatePDF(String outputPath ) {
         generate(outputPath);
     }
 

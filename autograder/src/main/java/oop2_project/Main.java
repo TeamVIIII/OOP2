@@ -1,33 +1,42 @@
 package oop2_project;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.junit.runner.notification.Failure;
+
+/*
+error testing for copier
+for compiling
+
+ */
+
 
 public class Main {
     public static void main(String[] args) 
     {
         Facade grade = new AutoGradeFacade();
 
-       String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submission.zip";
+        // String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submissions";
        
-        // Scanner cin = new Scanner(System.in);
-        // System.out.print("Enter the filepath of the zipped submissions: ");
+        Scanner cin = new Scanner(System.in);
+        System.out.print("Enter the filepath of the zipped submissions: ");
 
-        // String zipFile = cin.nextLine();
-        // while(!grade.isValidZipFile(zipFile))
-        // {
-        //     System.out.print("Please enter a valid file that ends in .zip: ");
-        //     zipFile = cin.nextLine();
+        String zipFile = cin.nextLine();
+        while(!grade.isValidZipFile(zipFile))
+        {
+            System.out.print("Please enter a valid file that ends in .zip: ");
+            zipFile = cin.nextLine();
 
-        // }
-        // cin.close();
+        }
+        cin.close();
 
         List<String> studentFolders = grade.getSubmissionFolders(zipFile);
-        for(String s : studentFolders)
+        for(String folderpath : studentFolders)
         { 
-            System.out.println(s);
-            OverallReport overallReport = grade.getReport(s);
+            System.out.println(folderpath);
+            OverallReport overallReport = grade.getReport(folderpath);
+            grade.generatePDf(overallReport, folderpath);
         }
-
     }
 }

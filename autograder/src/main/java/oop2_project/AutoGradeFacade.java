@@ -2,6 +2,7 @@ package oop2_project;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipFile;
 
@@ -43,9 +44,15 @@ public class AutoGradeFacade implements Facade
         return overallReport;
     }
 
-    public void generatePDf(OverallReport report)
+    public void generatePDf(OverallReport report, String folderpath)
     {
-        //code for generating pdf
+        List<String[]> failedTests = new ArrayList<>();
+        List<String[]> description = new ArrayList<>();
+
+        String fileName = FileNameExtractor.extractFileName(folderpath);
+        ReportGeneratorTemplate pdf = new PDFGenerator(failedTests, description,report);
+            
+        pdf.generatePDF(folderpath + "/" + fileName + ".pdf");
     }
 
     public boolean isValidZipFile(String submissionsZippedPath) 
