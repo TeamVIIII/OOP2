@@ -55,8 +55,6 @@ public abstract class AbstractReport implements Report
                 } 
             }
         }
-        
-        
     }
 
     private void setRecommendations(Result r)
