@@ -8,7 +8,7 @@ public class Main {
     {
         Facade grade = new AutoGradeFacade();
 
-       String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submission.zip";
+        String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submission.zip";
        
         // Scanner cin = new Scanner(System.in);
         // System.out.print("Enter the filepath of the zipped submissions: ");
