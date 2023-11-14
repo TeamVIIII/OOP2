@@ -2,21 +2,73 @@ package oop2_project;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.runner.Result;
 
 public class OverallReport implements Report
 {
     private final int overallTotal;
     private final List <Report> allReports;
+    private final List<String> reportNames;
+
+    public Report getReport(int i){
+        return allReports.get(i);
+    }
+    public String getRecommendationByReport(int i){
+        String recommended = "";
+        recommended = allReports.get(i).recommendationsToString()+"\n";
+        return recommended;
+    }
+
+    public int getNumReports(){
+        return allReports.size();
+    }
+
+    public String getReportName(int i){
+        return reportNames.get(i);
+    }
+
+    public int getAcquiredMarkbyReport(int x)
+    {
+        int mark = 0;
+
+        if(x>=0 && x<=3)
+        {
+            Report r = allReports.get(x);
+            return r.getAcquiredMark();
+
+        }
+
+        return mark;
+    }
+
+    public int getTotalMarkbyReport(int x)
+    {
+        int mark = 0;
+
+        if(x>=0 && x<=3)
+        {
+            Report r = allReports.get(x);
+            return r.getTotalMark();
+
+        }
+        return mark;
+    }
 
     public OverallReport()
     {
         this.overallTotal = 71;
         this.allReports = new ArrayList<>(4);
+        this.reportNames = new ArrayList<>(4);
+        reportNames.add("Passenger");
+        reportNames.add("LuggageSlip");
+        reportNames.add("LuggageManifest");
+        reportNames.add("Flight");
     }
 
     public void addReport(Report r)
     {
         allReports.add(r);
+
     }
 
     public void removeReport(Report r)
