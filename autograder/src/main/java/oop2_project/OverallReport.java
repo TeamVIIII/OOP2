@@ -56,4 +56,31 @@ public class OverallReport implements Report
         return this.overallTotal;
     }
 
+    public int getAcquiredMarkbyReport(int x)
+    {
+        int mark = 0;
+
+        if(x>=0 && x<=3)
+        {
+            Report r = allReports.get(x);
+            return r.getAcquiredMark();
+             
+        }
+
+        return mark;
+    }
+
+    public int getTotalMarkbyReport(int x)
+    {
+        int mark = 0;
+
+        if(x>=0 && x<=3)
+        {
+            Report r = allReports.get(x);
+            return r.getTotalMark();
+             
+        }
+        return mark;
+    }
+
 }

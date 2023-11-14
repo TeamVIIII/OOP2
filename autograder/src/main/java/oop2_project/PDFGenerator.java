@@ -2,8 +2,6 @@ package oop2_project;
 
 import java.io.FileOutputStream;
 import java.util.List;
-
-
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;  
 import com.itextpdf.text.DocumentException;

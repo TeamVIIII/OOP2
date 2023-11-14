@@ -12,7 +12,7 @@ public class CopyAll extends Copier
         
         
         
-        String thisFolder = "autograder/src/main/java/oop2_project";
+        String thisFolder = "src/main/java/oop2_project";
         destinations.add(thisFolder + "/Passenger.java");
         destinations.add(thisFolder + "/LuggageSlip.java");
         destinations.add(thisFolder + "/LuggageManifest.java");
