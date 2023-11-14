@@ -1,17 +1,21 @@
 package oop2_project;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.runner.Result;
 
 /*
  get the name of folder
- attach the name of the folder to .pdf eg(/Users/jerrellejohnson/Desktop/tesing/submissions/LuggageManagementSystem/LuggageManagementSystem.pdf)
- create in the pdf in this /Users/jerrellejohnson/Desktop/tesing/submissions/LuggageManagementSystem
+ attach the name of the folder to .pdf eg(/Users/jerrellejohnson/Desktop/tesing/submissions/LuggageManagementSystem/8160299808A1COMP2603.pdf)
+ create in the pdf in this /Users/jerrellejohnson/Desktop/tesing/submissions/8160299808A1COMP2603
  */
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
+
         String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submissions.zip";
 
         UnzipUtility unzipper = new UnzipUtility();
@@ -44,6 +48,10 @@ public class Main {
             overallReport.addReport(luggageSlipReport);
             overallReport.addReport(luggageManifestReport);
             overallReport.addReport(flightReport);
+
+            System.out.println("Passenger Total Marks: " + overallReport.getTotalMarkbyReport(2));
+            System.out.println("Passenger Acquired Marks: " + overallReport.getAcquiredMarkbyReport(2));
+            
 
             // /Users/jerrellejohnson/Desktop/tesing/submissions/Zachary_Rampersad_816031173_A1/Zachary_Rampersad_816031173_A1.pdf
             // System
