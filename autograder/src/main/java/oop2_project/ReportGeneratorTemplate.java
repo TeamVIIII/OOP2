@@ -1,23 +1,15 @@
 package oop2_project;
 
-import java.io.FileOutputStream;  
-import com.itextpdf.text.Document;   
-import com.itextpdf.text.pdf.PdfWriter; 
+import com.itextpdf.text.Document;  
 
 public abstract class ReportGeneratorTemplate{
-    public final void generatePDF(String outputPath) {
-        try {
-            Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(outputPath));
-            System.out.print(outputPath);
-            document.open();
-            createTable(document);
-            document.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    
+    public final void generatePDF(String outputPath ) {
+        generate(outputPath);
     }
 
+    protected abstract void generate(String outputPath);
     protected abstract void createTable(Document document);
+    protected abstract void createDescription(Document document);
     
 }
