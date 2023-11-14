@@ -114,7 +114,7 @@ public class PDFGenerator extends ReportGeneratorTemplate{
         c1 = new PdfPCell(new Phrase("5"));
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Total Mark Acquired:"));
+        c1 = new PdfPCell(new Phrase("Total"));
         table.addCell(c1);
         c1 = new PdfPCell(new Phrase(Integer.toString(overallReport.getTotalMark())));
         table.addCell(c1);
