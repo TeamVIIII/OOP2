@@ -2,8 +2,6 @@ package oop2_project;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.runner.Result;
-
 public class OverallReport implements Report
 {
     private final int overallTotal;

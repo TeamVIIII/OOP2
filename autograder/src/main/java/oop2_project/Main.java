@@ -1,9 +1,7 @@
 package oop2_project;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import org.junit.runner.notification.Failure;
 
 /*
 error testing for copier
@@ -17,18 +15,18 @@ public class Main {
     {
         Facade grade = new AutoGradeFacade();
 
-        // String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submissions";
+        String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submissions.zip";
        
         Scanner cin = new Scanner(System.in);
-        System.out.print("Enter the filepath of the zipped submissions: ");
+        // System.out.print("Enter the filepath of the zipped submissions: ");
 
-        String zipFile = cin.nextLine();
-        while(!grade.isValidZipFile(zipFile))
-        {
-            System.out.print("Please enter a valid file that ends in .zip: ");
-            zipFile = cin.nextLine();
+        // String zipFile = cin.nextLine();
+        // while(!grade.isValidZipFile(zipFile))
+        // {
+        //     System.out.print("Please enter a valid file that ends in .zip: ");
+        //     zipFile = cin.nextLine();
 
-        }
+        // }
         cin.close();
 
         List<String> studentFolders = grade.getSubmissionFolders(zipFile);
