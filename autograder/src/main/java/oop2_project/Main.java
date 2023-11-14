@@ -27,8 +27,6 @@ public class Main {
         { 
             System.out.println(s);
             OverallReport overallReport = grade.getReport(s);
-            
-
         }
 
     }
