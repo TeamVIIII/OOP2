@@ -8,6 +8,8 @@ import java.io.IOException;
 
 public abstract class Copier 
 {
+    public abstract void copyAll(String folderPath);
+    
     protected void copyFile(String testFilePath, String submissionFilePath)
     {
         try 
