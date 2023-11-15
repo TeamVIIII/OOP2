@@ -23,28 +23,42 @@ public class AutoGradeFacade implements Facade
         Copier copier = new CopyAll();
         Compiler compiler = new Compiler();
         RunTest executer = new RunAllTests();
+        OverallReport overallReport;
 
-        copier.copyAll(studentFolderPath);
-        compiler.compileTest(studentFolderPath);
-        List<Result> results = executer.runAll();
+        if(copier.copyAll(studentFolderPath)){
+            overallReport = new OverallReport();
+
+            compiler.compileTest(studentFolderPath);
+            List<Result> results = executer.runAll();
+            
+            Report passengerReport = new PassengerReport(results.get(0));
+            Report luggageSlipReport = new LuggageSlipReport(results.get(1));
+            Report luggageManifestReport = new LuggageManifestReport(results.get(2));
+            Report flightReport = new FlightReport(results.get(3));
+
+            
+            overallReport.addReport(passengerReport);
+            overallReport.addReport(luggageSlipReport);
+            overallReport.addReport(luggageManifestReport);
+            overallReport.addReport(flightReport);
+            return overallReport;
+
+        }
         
-        Report passengerReport = new PassengerReport(results.get(0));
-        Report luggageSlipReport = new LuggageSlipReport(results.get(1));
-        Report luggageManifestReport = new LuggageManifestReport(results.get(2));
-        Report flightReport = new FlightReport(results.get(3));
-
-        OverallReport overallReport = new OverallReport();
-        overallReport.addReport(passengerReport);
-        overallReport.addReport(luggageSlipReport);
-        overallReport.addReport(luggageManifestReport);
-        overallReport.addReport(flightReport);
-
-        return overallReport;
+        return null;
+        
     }
 
     public void generatePDf(OverallReport report, String folderpath)
     {
         String fileName = FileNameExtractor.extractFileName(folderpath);
+
+        if(report == null){
+            PDFGenerator failedPDF = new PDFGenerator(report);
+            failedPDF.generateFailedPDF(folderpath+"/"+fileName+".pdf");
+            return;
+        }
+        
         ReportGeneratorTemplate pdf = new PDFGenerator(report);
             
         pdf.generatePDF(folderpath + "/" + fileName + ".pdf");

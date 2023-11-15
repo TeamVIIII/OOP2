@@ -8,7 +8,7 @@ public class Main {
     {
         Facade grade = new AutoGradeFacade();
 
-        String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submissions5.zip";
+        String zipFile = "C:\\Users\\kiran\\Desktop\\OOP2\\autograder\\testData\\submissions5.zip";
        
         Scanner cin = new Scanner(System.in);
         // System.out.print("Enter the filepath of the zipped submissions: ");
@@ -27,6 +27,7 @@ public class Main {
         for(String folderpath : studentFolders)
         { 
             OverallReport overallReport = grade.getReport(folderpath);
+
             grade.generatePDf(overallReport,folderpath);
             grade.delete();
             grade.emptyGarbage();

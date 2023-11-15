@@ -7,6 +7,7 @@ public class OverallReport implements Report
     private final int overallTotal;
     private final List <Report> allReports;
     private final List<String> reportNames;
+    boolean compiled;
 
     public Report getReport(int i){
         return allReports.get(i);
@@ -35,6 +36,7 @@ public class OverallReport implements Report
         reportNames.add("LuggageManifest");
         reportNames.add("Flight");
     }
+
 
     public void addReport(Report r)
     {
