@@ -1,10 +1,12 @@
 package oop2_project;
+
 import org.junit.After;
 import org.junit.Before;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.lang.reflect.*;
 import java.time.LocalDateTime;
+import java.util.jar.Manifest;
 import java.util.ArrayList;
 
 public class LuggageManifestTest 
@@ -94,11 +96,11 @@ public class LuggageManifestTest
     @Test
     public void testAddLuggage() throws IllegalAccessException
     {
-        int allowedLuggage = flight.getAllowedLuggage(passenger.getCabinClass());
+        int allowedLuggage = getAllowedLuggage(passenger.getCabinClass(), flight);
         int numLuggage = passenger.getNumLuggage();
         int excessPieces = passenger.getNumLuggage() - allowedLuggage;
         String result = luggageManifest.addLuggage(passenger, flight);
-        String expected = "";
+        String expected = "a";
         
         try
         {
@@ -143,7 +145,7 @@ public class LuggageManifestTest
     @Test
     public void testGetExcessLuggageCost() throws IllegalAccessException
     {
-        int allowed = flight.getAllowedLuggage(passenger.getCabinClass());
+        int allowed = getAllowedLuggage(passenger.getCabinClass(), flight);
         int numPieces = passenger.getNumLuggage();
         int excessPieces = numPieces - allowed;
 
@@ -172,7 +174,7 @@ public class LuggageManifestTest
     @Test
     public void testGetExcessLuggageCostByPassenger()
     {
-        int allowed = flight.getAllowedLuggage(passenger.getCabinClass());
+        int allowed = getAllowedLuggage(passenger.getCabinClass(), flight);
         int numPieces = passenger.getNumLuggage();
         int excessPieces = numPieces - allowed;
         double cost = 0;
@@ -209,7 +211,7 @@ public class LuggageManifestTest
         
         if(numLuggages > 0)
         {
-            int allowed = flight.getAllowedLuggage(passenger.getCabinClass());
+            int allowed = getAllowedLuggage(passenger.getCabinClass(), flight);
             int excessPieces = numLuggages - allowed;
             
             
@@ -247,4 +249,22 @@ public class LuggageManifestTest
         }
         assertEquals(expected, luggageManifest.toString());
     }    
+    
+    private int getAllowedLuggage(char cabinClass, Flight flightInstance) {
+        try {
+            // Attempt to get the method by its name (regardless of whether it's static or non-static)
+            Method method = Flight.class.getMethod("getAllowedLuggage", char.class);
+            if (Modifier.isStatic(method.getModifiers())) {
+                // If the method is static, invoke it using the class
+                return (int) method.invoke(null, cabinClass);
+            } else {
+                // If the method is non-static, invoke it using the instance
+                return (int) method.invoke(flightInstance, cabinClass);
+            }
+        } catch (Exception e) {
+            // Handle exceptions or return a default value as needed
+            e.printStackTrace();
+            return -1; // Or any other default value
+        }
+    }
 }

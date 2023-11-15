@@ -1,69 +1,79 @@
 package oop2_project;
 
-// Student ID: 816031173
-// Student Name: Zachary Rampersad
-
-import java.util.Random; 
-
+import java.util.Random;
+/**
+ * Write a description of class Passenger here.
+ *
+ * @author (Jardel Mitchell)
+ * @version (......... 02/09/2023)
+ */
 public class Passenger{
     private String passportNumber;
     private String flightNo;
     private String firstName;
     private String lastName;
-    private int numLuggage ;
+    private int numLuggage;
     private char cabinClass;
     
-    Passenger(String passportNumber, String firstName, String lastName, String flightNo){
-        this.passportNumber = passportNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.flightNo = flightNo;
-        assignRandomCabinClass();
-        Random r = new Random();
-        setNumLuggage(r.nextInt(4));
-    }
-    
-    public void setNumLuggage(int numLuggage){
-        this.numLuggage = numLuggage;
-    }
-    
+    //Accessors
     public String getPassportNumber(){
-        return passportNumber;
+        return flightNo;
     }
-    
     public String getFlightNo(){
         return flightNo;
     }
-    
     public String getFirstName(){
-        return firstName;
+        return flightNo;
     }
-    
     public String getLastName(){
-        return lastName;
+        return flightNo;
     }
-    
     public int getNumLuggage(){
         return numLuggage;
     }
-    
     public char getCabinClass(){
         return cabinClass;
     }
     
-    public void assignRandomCabinClass(){
-        char[] classes = {'F','B','P','E'};
-        Random r = new Random();
-        
-        cabinClass = classes[(r.nextInt(4))];
-        
+    
+    public Passenger(String passportNumber, String firstName,
+                                String lastName, String flightNo){
+        this.passportNumber = passportNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.flightNo = flightNo;
+        getRandomLuggage();
+        assignRandomCabinClass();
+
     }
     
-    public String toString(){
-        return("PP NO. "+getPassportNumber()+" NAME: "+(getFirstName()).charAt(0)+
-        "."+getLastName()+" NUMLUGGAGE: "+getNumLuggage()+" CLASS: "+
-        getCabinClass());
+    public void getRandomLuggage(){
+        Random random = new Random();
+        this.numLuggage = random.nextInt(4);
     }
+    
+    public void assignRandomCabinClass(){
+            char[] cabinClass = {'F','B','P','E'}; 
+            Random randomCabin = new Random(4);
+            int randomCabinClass = randomCabin.nextInt(cabinClass.length);
+            this.cabinClass = cabinClass[randomCabinClass];
+             
+        }
+    
+    public char getCharacter(String firstName){
+        return firstName.charAt(0) ;
+    }
+        
+    public String toString(){
+        String output = "PP No. : " + getPassportNumber() + " Name: " 
+        + getCharacter(getFirstName()) + "." + getLastName() + " NUMLUGGAGE "
+        + getNumLuggage() + " Class: " + getCabinClass() + "\n";
+        return output;
+    }
+                
+    
     
     
 }
+
+ 

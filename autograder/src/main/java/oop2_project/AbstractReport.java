@@ -58,11 +58,13 @@ public abstract class AbstractReport implements Report
                 if (markPerTest.containsKey(methodName)) 
                 {
                     this.acquiredMark -= markPerTest.get(methodName);
+                    
                     reportRecommendations.add(recommendationPerTest.get(methodName));
                     
                 } 
             }
         }
+        System.out.println(this.acquiredMark);
     }
 
     private void setRecommendations(Result r)

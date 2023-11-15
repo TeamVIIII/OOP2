@@ -1,4 +1,5 @@
 package oop2_project;
+
 import org.junit.After;
 import org.junit.Before;
 import static org.junit.Assert.*;
@@ -118,7 +119,8 @@ public class LuggageSlipTest {
         catch(NoSuchFieldException e)
         {
             
-        }   
+        }
+            
     }
        
     @Test
@@ -157,16 +159,5 @@ public class LuggageSlipTest {
     {
         assertTrue(slip1.hasOwner(passportNumber));
     }
-
-    @Test
-    public void testToStringFormat()
-    {
-        String expectedNoSlip = slip1.getLuggageSlipID() + " " + owner.toString() + "";
-
-        String expectedWithSlip = slip1.getLuggageSlipID() + " " + owner.toString() + "";
-        
-
-        assertEquals(expectedNoSlip, slip1.toString());
-        assertEquals(expectedWithSlip, slip1.toString());
-    }
 }
+

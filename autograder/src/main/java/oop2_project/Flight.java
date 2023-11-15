@@ -1,10 +1,12 @@
 package oop2_project;
 
-// Student ID: 816031173
-// Student Name: Zachary Rampersad
-
 import java.time.LocalDateTime;
-
+/**
+ * Write a description of class Flight here.
+ *
+ * @author (Jardel Mitchell)
+ * @version (10/02/2023)
+ */
 public class Flight{
     private String flightNo;
     private String destination;
@@ -12,40 +14,41 @@ public class Flight{
     private LocalDateTime flightDate;
     private LuggageManifest manifest;
     
-    public Flight(String flightNo, String destination, String origin, 
-    LocalDateTime flightDate){
+    //Accessors    
+    public String getFlightNo(){
+        return flightNo;
+    }
+    public String getDestination(){
+        return flightNo;
+    }
+    public String getOrigin(){
+        return flightNo;
+    }
+    public LocalDateTime getFlightDate(){
+        return flightDate;
+    }
+    public LuggageManifest getManifest(){
+        return manifest;
+    }
+    
+    //Constructor
+    public Flight (String flightNo, String destination, 
+                    String origin, LocalDateTime flightDate){
         this.flightNo = flightNo;
         this.destination = destination;
         this.origin = origin;
         this.flightDate = flightDate;
-        manifest = new LuggageManifest();
+        this.manifest = new LuggageManifest();
     }
     
-    public String getFlightNo(){
-        return flightNo;
-    }
-    
-    public String getDestination(){
-        return destination;
-    }
-    
-    public String getOrigin(){
-        return origin;
-    }
-
-    public LocalDateTime getFlightDate(){
-        return flightDate;
-    }
-    
-    public LuggageManifest getLuggageManifest(){
-        return manifest;
+    public Flight(String flightNo){
+        this.flightNo = flightNo;
     }
     
     public String checkInLuggage(Passenger p){
-        
-        if(getFlightNo().equals(p.getFlightNo()))
-            return getLuggageManifest().addLuggage(p,this);
-        
+        if(p.getFlightNo().equals(this.flightNo)){
+            return getManifest().addLuggage(p, this);
+        }
         else
             return "Invalid Flight";
     }
@@ -53,22 +56,29 @@ public class Flight{
     public String printLuggageManifest(){
         return manifest.toString();
     }
-    
+
     public int getAllowedLuggage(char cabinClass){
-        switch(cabinClass){
-            case 'F': return 3;
-            case 'B': return 2;
-            case 'P': return 1;
-            case 'E': return 0;
+        int numAllowedPieces = 0;
+        if(cabinClass == 'F'){
+            numAllowedPieces = 3;
         }
-        
-        return 0;
+        else if(cabinClass == 'B'){
+            numAllowedPieces = 2;
+        }
+        else if(cabinClass == 'P'){
+            numAllowedPieces = 1;
+        }
+        else if(cabinClass == 'E'){
+            numAllowedPieces = 0;
+        }
+        return numAllowedPieces;       
     }
     
     public String toString(){
-        return (getFlightNo()+" DESTINATION:"+getDestination()+" ORIGIN:"
-        +getOrigin()+" "+getFlightDate());
+        return getFlightNo() + " Destination: " + getDestination() + " Origin: " 
+        + getOrigin() + " " + getFlightDate();
     }
     
-}
+    
 
+}
