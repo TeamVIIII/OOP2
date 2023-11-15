@@ -1,6 +1,7 @@
 package oop2_project;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,26 @@ public class PDFGenerator extends ReportGeneratorTemplate{
         this.improvementText = improvementText;
         this.overallReport = overallReport;
         //this.fileName = fileName;
+    }
+
+    public PDFGenerator(OverallReport failedReport, boolean failed){
+        this.testCases = new ArrayList<>();
+        this.improvementText = new ArrayList<>();
+        this.overallReport = failedReport;
+    }
+
+    protected void generateFailedPDF(String outputPath){
+        try{
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(outputPath));
+            document.open();
+            createFailedTable(document);
+            // createDescription(document);
+            // addRecommendationsTable(document);
+            document.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     protected void generate(String outputPath){
@@ -92,6 +113,53 @@ public class PDFGenerator extends ReportGeneratorTemplate{
             }
         }
 
+
+    }
+
+    protected void createFailedTable(Document document){
+        PdfPTable table = new PdfPTable(3);
+        // Set table alignment
+        table.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+
+        PdfPCell c1 =new PdfPCell(new Phrase("Class"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+        c1 =new PdfPCell(new Phrase("Total"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+        c1 =new PdfPCell(new Phrase("Mark"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        
+
+        c1 = new PdfPCell(new Phrase("Some or all java files were missing"));
+        table.addCell(c1);
+        c1 = new PdfPCell(new Phrase(Integer.toString(0)));
+        table.addCell(c1);
+        c1 = new PdfPCell(new Phrase(Integer.toString(0)));
+        table.addCell(c1);
+        
+
+        c1 = new PdfPCell(new Phrase("Compiled"));
+        table.addCell(c1);
+        c1 = new PdfPCell(new Phrase("5"));
+        table.addCell(c1);
+        c1 = new PdfPCell(new Phrase("0"));
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Total Mark Acquired:"));
+        table.addCell(c1);
+        c1 = new PdfPCell(new Phrase("0"));
+        table.addCell(c1);
+        c1 = new PdfPCell(new Phrase("0"));
+        table.addCell(c1);
+
+        try {
+            document.add(table);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
 
     }
 
