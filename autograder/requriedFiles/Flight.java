@@ -1,5 +1,3 @@
-package oop2_project;
-
 
 import java.time.LocalDateTime;
 //816029808

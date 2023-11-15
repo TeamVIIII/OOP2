@@ -1,98 +1,37 @@
 package oop2_project;
 
 import java.util.List;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
-
-/*
- get the name of folder
- attach the name of the folder to .pdf eg(/Users/jerrellejohnson/Desktop/tesing/submissions/LuggageManagementSystem/LuggageManagementSystem.pdf)
- create in the pdf in this /Users/jerrellejohnson/Desktop/tesing/submissions/LuggageManagementSystem
- */
-
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        String zipFile = "C:\\Users\\kiran\\Downloads\\submissions.zip";
-        UnzipUtility unzipper = new UnzipUtility();
-        GetUnzippedPaths zippedSubmissionsPaths = new GetUnzippedPaths();
-        CopyAll copier = new CopyAll();
-        Compiler compiler = new Compiler();
-        RunAllTests executer = new RunAllTests();
-        String unzippedFolder = unzipper.unzip(zipFile);
-        
+    public static void main(String[] args) 
+    {
+        Facade grade = new AutoGradeFacade();
 
-
-        //System.out.println(unzippedFolder);
-        //====================================================================
-
-        // ArrayList<Report> idk = new ArrayList<>();
-        /* 
-        
-         *///====================================================================
-        
-       List<String> unzippedSubmissionFoldersPath = zippedSubmissionsPaths.traversefolder(unzippedFolder);
-
+        String zipFile = "/Users/jerrellejohnson/Desktop/tesing/submissions5.zip";
        
-        for(int i=0;i<unzippedSubmissionFoldersPath.size();i++)
-        { 
-            //System.out.println(s);
+        Scanner cin = new Scanner(System.in);
+        // System.out.print("Enter the filepath of the zipped submissions: ");
 
+        // String zipFile = cin.nextLine();
+        // while(!grade.isValidZipFile(zipFile))
+        // {
+        //     System.out.print("Please enter a valid file that ends in .zip: ");
+        //     zipFile = cin.nextLine();
 
-            System.out.println(unzippedSubmissionFoldersPath.get(i));
-
-            copier.copyAll(unzippedSubmissionFoldersPath.get(i));
-            if(!copier.copyAll(unzippedSubmissionFoldersPath.get(i))){
-                OverallReport failedReport = new OverallReport();
-                String fileName = FileNameExtractor.extractFileName(unzippedSubmissionFoldersPath.get(i));
-                PDFGenerator pdf = new PDFGenerator(failedReport, true);
-                pdf.generateFailedPDF(unzippedSubmissionFoldersPath.get(i) + "/" + fileName + ".pdf");
-                continue;
-            }
-            
-            compiler.compileTest(unzippedSubmissionFoldersPath.get(i));
-            
-
-            
-
-            List<Result> results = executer.runAll(); 
-
-            Report passengerReport = new PassengerReport(results.get(0));
-            Report luggageSlipReport = new LuggageSlipReport(results.get(1));
-            Report luggageManifestReport = new LuggageManifestReport(results.get(2));
-            Report flightReport = new FlightReport(results.get(3));
-
-            OverallReport overallReport = new OverallReport();
-
-            overallReport.addReport(passengerReport);
-            overallReport.addReport(luggageSlipReport);
-            overallReport.addReport(luggageManifestReport);
-            overallReport.addReport(flightReport);
-            System.out.println(overallReport.recommendationsToString());
-
-            List<String[]> failedTests = new ArrayList<>();
-            List<String[]> description = new ArrayList<>();
-            List<String> fails = new ArrayList<>();
-            //testCases.add(new String[]{"Passenger", "8", "7"});
-            //testCases.add(new String[]{"Flight", "12", "10"});
-            //description.add(new String[]{"Checking the desccription text"});
-            //description.add(new String[]{"Checking the desccription text #2"});
-            String fileName = FileNameExtractor.extractFileName(unzippedSubmissionFoldersPath.get(i));
-            ReportGeneratorTemplate pdf = new PDFGenerator(failedTests, description,overallReport);
-            pdf.generatePDF(unzippedSubmissionFoldersPath.get(i) + "/" + fileName + ".pdf");
-
-            
-
-            // /Users/jerrellejohnson/Desktop/tesing/submissions/Zachary_Rampersad_816031173_A1/Zachary_Rampersad_816031173_A1.pdf
-            // System
-            // System.out.println("Recommendations: " + overallReport.recommendationsToString());
-            // "C:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1.zip"
-            // C:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1
-            // "C:\\Users\\jmitc\\Downloads\\submissions.zip"
-            //"C:\\Users\\jmitc\\Downloads\\submissions.zip"
-        }
- 
+        // }
+        cin.close();
         
-
+        List<String> studentFolders = grade.getSubmissionFolders(zipFile);
+        grade.delete();
+        for(String folderpath : studentFolders)
+        { 
+            OverallReport overallReport = grade.getReport(folderpath);
+            grade.generatePDf(overallReport,folderpath);
+            grade.delete();
+            grade.emptyGarbage();
+        }
+        
+        grade.resetState();
     }
 }

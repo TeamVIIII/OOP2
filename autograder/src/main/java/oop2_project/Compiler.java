@@ -26,7 +26,8 @@ public class Compiler{
         compileCommands.add("LuggageSlipTest.java");
         compileCommands.add("LuggageManifestTest.java");
 
-        try {
+        try 
+        {
             ProcessBuilder compiler = new ProcessBuilder(compileCommands);
             compiler.directory(new File("src/main/java/oop2_project"));
             Process compileProcess = compiler.start();
@@ -34,6 +35,11 @@ public class Compiler{
 
             if (compileExitCode == 0)
                 return true;
+
+            if(compileExitCode !=0){
+                System.out.println("Error compiling tests");
+            }
+            
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

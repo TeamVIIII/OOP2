@@ -3,17 +3,11 @@ package oop2_project;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import javax.naming.spi.DirStateFactory.Result;
-
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;  
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -22,17 +16,11 @@ import com.itextpdf.text.Element;
 
 
 public class PDFGenerator extends ReportGeneratorTemplate{
-    private final List<String[]> testCases;
-    private final List<String[]> improvementText;
     private OverallReport overallReport;
     private AbstractReport ar;
-    //private String fileName;
 
-    public PDFGenerator(List<String[]> testCases, List<String[]> improvementText,OverallReport overallReport){
-        this.testCases = testCases;
-        this.improvementText = improvementText;
+    public PDFGenerator(OverallReport overallReport){
         this.overallReport = overallReport;
-        //this.fileName = fileName;
     }
 
     public PDFGenerator(OverallReport failedReport, boolean failed){
@@ -61,7 +49,7 @@ public class PDFGenerator extends ReportGeneratorTemplate{
             PdfWriter.getInstance(document, new FileOutputStream(outputPath));
             document.open();
             createTable(document);
-            createDescription(document);
+            // createDescription(document);
             addRecommendationsTable(document);
             document.close();
         } catch (Exception e){
@@ -94,7 +82,8 @@ public class PDFGenerator extends ReportGeneratorTemplate{
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
 
-            for (Map.Entry<String,String> entry : recsPerTest.entrySet()){
+            for (Map.Entry<String,String> entry : recsPerTest.entrySet())
+            {
                 c1 =new PdfPCell(new Phrase(entry.getKey()));
                 c1.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(c1);
@@ -102,8 +91,6 @@ public class PDFGenerator extends ReportGeneratorTemplate{
                 table.addCell(c1);
 
             }
-
-            
             
             try {
                 document.add(subPara);
@@ -195,52 +182,15 @@ public class PDFGenerator extends ReportGeneratorTemplate{
         c1 = new PdfPCell(new Phrase("5"));
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Total Mark Acquired:"));
+        c1 = new PdfPCell(new Phrase("Total"));
         table.addCell(c1);
         c1 = new PdfPCell(new Phrase(Integer.toString(overallReport.getTotalMark())));
         table.addCell(c1);
         c1 = new PdfPCell(new Phrase(Integer.toString(overallReport.getAcquiredMark())));
         table.addCell(c1);
-
-
-
-        // Add table headers
-        // table.addCell("Class");
-        // table.addCell("Total");
-        // table.addCell("Mark");
-
-        // Add table data
-        // for (String[] testCase : testCases) {
-        //     for (String cell : testCase) {
-        //         // Set cell alignment
-        //         table.addCell(new Paragraph(cell, getCellFont()));
-        //     }
-        // }
-        
-
-        
         
         try {
             document.add(table);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
-    }
-
-    protected void createDescription(Document document) {
-        Paragraph paragraph = new Paragraph();
-        // Set paragraph alignment
-        paragraph.setAlignment(Element.ALIGN_JUSTIFIED);
-
-        for(String[] improvemets : improvementText){
-            for(String text : improvemets){
-                paragraph.add(Chunk.NEWLINE);
-                paragraph.add(text);
-            }
-        }
-
-        try {
-            document.add(paragraph);
         } catch (DocumentException e) {
             e.printStackTrace();
         }

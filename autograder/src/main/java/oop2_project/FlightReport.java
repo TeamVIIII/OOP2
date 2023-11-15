@@ -32,7 +32,7 @@ public class FlightReport extends AbstractReport{
         recommendationPerTest.put("testConstructor", "Ensure the constructor creates a new LuggageManifest object and initializes the class variables");
         recommendationPerTest.put("testCheckInLuggage", "Check if a passenger.flightNo matches flight.flighNo. If it does return the string which is returened from the call of addLuggage of LuggageSlip class else return Invalid flight");
         recommendationPerTest.put("testPrintLuggageManifest", "This method return the string from the call of manifest.toString()");
-        recommendationPerTest.put("testgetAllowedLuggage", "Ensure this method returns the correct integer based on the char parsed in and is a static method. Eg. if 'F' is parsed it should return 3.");
+        recommendationPerTest.put("testgetAllowedLuggage", "Ensure this method returns the correct integer based on the char parsed in and is a static method. Eg. if 'F' is parsed it should return 3. This method should also be static.");
         recommendationPerTest.put("testToString", "Ensure Flight's toString method returns the string in this format: BW817 DESTINATION: TOBAGO ORIGIN: TRINIDAD 2017-01-13T17:09:42.411");
 
     }

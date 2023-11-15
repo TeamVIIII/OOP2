@@ -8,10 +8,11 @@ import org.junit.runner.Result;
 public class RunAllTests extends RunTest
 {
     
-    private final List<Class<?>> testClasses = new ArrayList<>();
+    private final List<Class<?>> testClasses;
 
     public RunAllTests()
     {
+        testClasses = new ArrayList<>();
         testClasses.add(PassengerTest.class);
         testClasses.add(LuggageSlipTest.class);
         testClasses.add(LuggageManifestTest.class);
@@ -24,7 +25,7 @@ public class RunAllTests extends RunTest
 
         for(Class<?> testname: testClasses)
         {
-            org.junit.runner.Result result = runTest(testname);
+            Result result = runTest(testname);
             results.add(result);
         }
         

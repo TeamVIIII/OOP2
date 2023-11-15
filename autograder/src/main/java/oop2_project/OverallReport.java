@@ -2,8 +2,6 @@ package oop2_project;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.runner.Result;
-
 public class OverallReport implements Report
 {
     private final int overallTotal;
@@ -25,33 +23,6 @@ public class OverallReport implements Report
 
     public String getReportName(int i){
         return reportNames.get(i);
-    }
-
-    public int getAcquiredMarkbyReport(int x)
-    {
-        int mark = 0;
-
-        if(x>=0 && x<=3)
-        {
-            Report r = allReports.get(x);
-            return r.getAcquiredMark();
-
-        }
-
-        return mark;
-    }
-
-    public int getTotalMarkbyReport(int x)
-    {
-        int mark = 0;
-
-        if(x>=0 && x<=3)
-        {
-            Report r = allReports.get(x);
-            return r.getTotalMark();
-
-        }
-        return mark;
     }
 
     public OverallReport()
@@ -85,7 +56,6 @@ public class OverallReport implements Report
         {
             int reportMark = r.getAcquiredMark();
             acquired += reportMark;
-            System.out.println(reportMark);
         }
 
         return acquired+5;
