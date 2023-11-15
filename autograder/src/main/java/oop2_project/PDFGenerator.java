@@ -24,8 +24,7 @@ public class PDFGenerator extends ReportGeneratorTemplate{
     }
 
     public PDFGenerator(OverallReport failedReport, boolean failed){
-        this.testCases = new ArrayList<>();
-        this.improvementText = new ArrayList<>();
+
         this.overallReport = failedReport;
     }
 
@@ -35,8 +34,6 @@ public class PDFGenerator extends ReportGeneratorTemplate{
             PdfWriter.getInstance(document, new FileOutputStream(outputPath));
             document.open();
             createFailedTable(document);
-            // createDescription(document);
-            // addRecommendationsTable(document);
             document.close();
         } catch (Exception e){
             e.printStackTrace();

@@ -11,14 +11,17 @@ public class CopyAll extends Copier
 
     public boolean copyAll(String folderPath)
     {
-        if(!isAllFilesContainedInFolder(folderPath)){
-            return false;
-        }
+        
 
         fileNames.add("Passenger.java");
         fileNames.add("LuggageSlip.java");
         fileNames.add("LuggageManifest.java");
         fileNames.add("Flight.java");
+
+        if(!isAllFilesContainedInFolder(folderPath)){
+
+            return false;
+        }
 
         List<String> destinations = new ArrayList<>(4);
         List<String> sources = new ArrayList<>(4);

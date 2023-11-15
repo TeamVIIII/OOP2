@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public abstract class Copier 
 {
-    public abstract void copyAll(String folderPath);
+    public abstract boolean copyAll(String folderPath);
     
     protected void copyFile(String testFilePath, String submissionFilePath)
     {
