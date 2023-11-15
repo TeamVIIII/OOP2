@@ -32,14 +32,28 @@ public class Main {
          *///====================================================================
         
        List<String> unzippedSubmissionFoldersPath = zippedSubmissionsPaths.traversefolder(unzippedFolder);
-        //for(String s : unzippedSubmissionFoldersPath)
-        //{ 
+
+       
+        for(int i=0;i<unzippedSubmissionFoldersPath.size();i++)
+        { 
             //System.out.println(s);
 
 
-            System.out.println(unzippedSubmissionFoldersPath.get(1));
-            copier.copyAll(unzippedSubmissionFoldersPath.get(1));
-            compiler.compileTest(unzippedSubmissionFoldersPath.get(1)); 
+            System.out.println(unzippedSubmissionFoldersPath.get(i));
+
+            copier.copyAll(unzippedSubmissionFoldersPath.get(i));
+            if(!copier.copyAll(unzippedSubmissionFoldersPath.get(i))){
+                OverallReport failedReport = new OverallReport();
+                String fileName = FileNameExtractor.extractFileName(unzippedSubmissionFoldersPath.get(i));
+                PDFGenerator pdf = new PDFGenerator(failedReport, true);
+                pdf.generateFailedPDF(unzippedSubmissionFoldersPath.get(i) + "/" + fileName + ".pdf");
+                continue;
+            }
+            
+            compiler.compileTest(unzippedSubmissionFoldersPath.get(i));
+            
+
+            
 
             List<Result> results = executer.runAll(); 
 
@@ -63,9 +77,9 @@ public class Main {
             //testCases.add(new String[]{"Flight", "12", "10"});
             //description.add(new String[]{"Checking the desccription text"});
             //description.add(new String[]{"Checking the desccription text #2"});
-            String fileName = FileNameExtractor.extractFileName(unzippedSubmissionFoldersPath.get(1));
+            String fileName = FileNameExtractor.extractFileName(unzippedSubmissionFoldersPath.get(i));
             ReportGeneratorTemplate pdf = new PDFGenerator(failedTests, description,overallReport);
-            pdf.generatePDF(unzippedSubmissionFoldersPath.get(1) + "\\" + fileName + ".pdf");
+            pdf.generatePDF(unzippedSubmissionFoldersPath.get(i) + "/" + fileName + ".pdf");
 
             
 
@@ -76,7 +90,7 @@ public class Main {
             // C:\\Users\\jmitc\\Downloads\\submissions\\Zachary_Rampersad_816031173_A1
             // "C:\\Users\\jmitc\\Downloads\\submissions.zip"
             //"C:\\Users\\jmitc\\Downloads\\submissions.zip"
-        //}
+        }
  
         
 

@@ -65,6 +65,7 @@ public class OverallReport implements Report
         reportNames.add("Flight");
     }
 
+
     public void addReport(Report r)
     {
         allReports.add(r);
