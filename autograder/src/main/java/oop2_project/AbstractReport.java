@@ -13,7 +13,7 @@ public abstract class AbstractReport implements Report
     protected Map<String, Integer> markPerTest;
     protected Map<String, String> recommendationPerTest;
     private int highestPossible = 0;
-    private int acquiredMark = 0;
+    private int acquiredMark;
     private List<String> reportRecommendations = new ArrayList<>();
     protected Map<String,String> failedTests;
 
@@ -23,6 +23,7 @@ public abstract class AbstractReport implements Report
         recommendationPerTest = new HashMap<>();
         reportRecommendations = new ArrayList<>();
         failedTests = new HashMap<>();
+        this.acquiredMark = 0;
         
         setMarksPerTest();
         setRecommendationsPerTest();
@@ -37,7 +38,6 @@ public abstract class AbstractReport implements Report
         return failedTests;
     }
     
-
     protected abstract void setMarksPerTest();
     protected abstract void setRecommendationsPerTest();
 
@@ -64,7 +64,6 @@ public abstract class AbstractReport implements Report
                 } 
             }
         }
-        System.out.println(this.acquiredMark);
     }
 
     private void setRecommendations(Result r)
@@ -101,8 +100,6 @@ public abstract class AbstractReport implements Report
         {
             message = message + s + "\n";
         }
-
         return message;
     }
-
 }

@@ -8,5 +8,7 @@ public interface Facade
     public OverallReport getReport(String studentFolderPath);
     public void generatePDf(OverallReport report, String folderpath);
     public  boolean isValidZipFile(String submissionsZippedPath);
-    
+    public void delete();
+    public void resetState();
+    public void emptyGarbage();
 }

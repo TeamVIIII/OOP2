@@ -20,13 +20,12 @@ public class AutoGradeFacade implements Facade
 
     public OverallReport getReport(String studentFolderPath)
     {
-        CopyAll copier = new CopyAll();
+        Copier copier = new CopyAll();
         Compiler compiler = new Compiler();
-        RunAllTests executer = new RunAllTests();
+        RunTest executer = new RunAllTests();
 
         copier.copyAll(studentFolderPath);
         compiler.compileTest(studentFolderPath);
-        
         List<Result> results = executer.runAll();
         
         Report passengerReport = new PassengerReport(results.get(0));
@@ -70,6 +69,22 @@ public class AutoGradeFacade implements Facade
             System.out.println("Not a valid file!");
             return false; // The file does not exist, so it cannot be a valid ZIP file
         }
+    }
+
+    public void delete()
+    {
+        DeleteClassFiles.deleteFiles();
+    }
+
+    public void resetState()
+    {
+        Copier copier = new CopyAll();
+        copier.copyAll("requriedFiles");
+    }
+
+    public void emptyGarbage()
+    {
+        System.gc();
     }
 
     
