@@ -26,34 +26,30 @@ public class AutoGradeFacade implements Facade
         OverallReport overallReport;
 
         if(copier.copyAll(studentFolderPath)){
-            overallReport = new OverallReport();
+            if(compiler.compileTest(studentFolderPath))
+            {
+                List<Result> results = executer.runAll();
+                overallReport = new OverallReport();
+                Report passengerReport = new PassengerReport(results.get(0));
+                Report luggageSlipReport = new LuggageSlipReport(results.get(1));
+                Report luggageManifestReport = new LuggageManifestReport(results.get(2));
+                Report flightReport = new FlightReport(results.get(3));
 
-            compiler.compileTest(studentFolderPath);
-            List<Result> results = executer.runAll();
-            
-            Report passengerReport = new PassengerReport(results.get(0));
-            Report luggageSlipReport = new LuggageSlipReport(results.get(1));
-            Report luggageManifestReport = new LuggageManifestReport(results.get(2));
-            Report flightReport = new FlightReport(results.get(3));
-
-            
-            overallReport.addReport(passengerReport);
-            overallReport.addReport(luggageSlipReport);
-            overallReport.addReport(luggageManifestReport);
-            overallReport.addReport(flightReport);
-            return overallReport;
-
+                overallReport.addReport(passengerReport);
+                overallReport.addReport(luggageSlipReport);
+                overallReport.addReport(luggageManifestReport);
+                overallReport.addReport(flightReport);
+                return overallReport;
+            }
         }
         
         return null;
-        
     }
 
     public void generatePDf(OverallReport report, String folderpath)
     {
         String fileName = FileNameExtractor.extractFileName(folderpath);
        
-        
         if(report == null){
             PDFGenerator failedPDF = new PDFGenerator(report);
             failedPDF.generateFailedPDF(folderpath+"/"+fileName+".pdf");

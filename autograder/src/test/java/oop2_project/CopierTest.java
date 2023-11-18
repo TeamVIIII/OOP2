@@ -21,7 +21,7 @@ public class CopierTest
     }
 
     @Test
-    public void testEmptyFolder() // shouldnt try to copy items from a file thats empty
+    public void testEmptyFolder() // shouldn't try to copy items from a file thats empty
     {
         String emptyFolderPath = "testData/DataToTestCopier/emptyfolder";
 

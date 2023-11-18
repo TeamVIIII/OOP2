@@ -152,7 +152,7 @@ public class FlightTest
         String expected = "";
         result = flight.checkInLuggage(passenger);
         
-        int allowedLuggage = flight.getAllowedLuggage(passenger.getCabinClass());
+        int allowedLuggage = getAllowedLuggage(passenger.getCabinClass());
         int numLuggage = passenger.getNumLuggage();
         int excessPieces = passenger.getNumLuggage() - allowedLuggage;
         
@@ -213,9 +213,7 @@ public class FlightTest
             System.out.println("manifest error in testcheckInLuggage \n" + e);
         }
 
-
-        String x = manifest.addLuggage(passenger,flight);
-        String result = manifest.toString();
+        manifest.addLuggage(passenger,flight);
         
         try {
             Field field = LuggageSlip.class.getDeclaredField("luggageSlipIDCounter");
@@ -225,15 +223,13 @@ public class FlightTest
         
         if(numLuggages > 0)
         {
-            int allowed = flight.getAllowedLuggage(passenger.getCabinClass());
+            int allowed = getAllowedLuggage(passenger.getCabinClass());
             int excessPieces = numLuggages - allowed;
             
             
-            double cost = 0;
 
             if (excessPieces > 0)
             {
-                cost = excessPieces * 35;
                 try
                 {
                     Class<?> clas = manifest.getClass();
@@ -268,10 +264,10 @@ public class FlightTest
     @Test
     public void testgetAllowedLuggage()
     {
-        assertEquals(flight.getAllowedLuggage('F'), 3);
-        assertEquals(flight.getAllowedLuggage('B'), 2);
-        assertEquals(flight.getAllowedLuggage('P'), 1);
-        assertEquals(flight.getAllowedLuggage('E'), 0);
+        assertEquals(getAllowedLuggage('F'), 3);
+        assertEquals(getAllowedLuggage('B'), 2);
+        assertEquals(getAllowedLuggage('P'), 1);
+        assertEquals(getAllowedLuggage('E'), 0);
         
         Boolean p = false;
         
@@ -293,4 +289,24 @@ public class FlightTest
         + flightDate;
         assertEquals(expected, flight.toString());
     }
+
+    private int getAllowedLuggage(char cabinClass) 
+    {
+        try 
+        {
+            Method method = Flight.class.getMethod("getAllowedLuggage", char.class);
+            if (Modifier.isStatic(method.getModifiers())) 
+            {
+                return (int) method.invoke(null, cabinClass);
+            } else 
+            {
+                return (int) method.invoke(cabinClass);
+            }
+        } catch (Exception e) // method was not found
+        {
+            // e.printStackTrace();
+            return -1;
+        }
+    }
+    
 }

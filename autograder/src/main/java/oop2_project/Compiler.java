@@ -17,7 +17,7 @@ public class Compiler{
         compileCommands.add("javac");
         compileCommands.add("-cp");
         compileCommands.add("junit-4.13.2.jar");
-        compileCommands.add("Passenger.java"); // Filename must be in form "Passenger.java" not "/Passenger.java"
+        compileCommands.add("Passenger.java");
         compileCommands.add("LuggageSlip.java");
         compileCommands.add("LuggageManifest.java");
         compileCommands.add("Flight.java");
@@ -40,11 +40,11 @@ public class Compiler{
                 System.out.println("Error compiling tests");
             }
             
-
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             System.out.println(e);
         }
+
         return false;
     }
 
