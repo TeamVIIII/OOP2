@@ -26,7 +26,7 @@ public class AutoGradeFacade implements Facade
         OverallReport overallReport;
 
         if(copier.copyAll(studentFolderPath)){
-            if(compiler.compileTest(studentFolderPath))
+            if(compiler.compileTest())
             {
                 List<Result> results = executer.runAll();
                 overallReport = new OverallReport();

@@ -1,17 +1,12 @@
 package oop2_project;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Compiler{
-    public boolean compileTest(String folderPath) {
-
-        if(!containsJavaFiles(folderPath)){
-            return false;
-        }
+    public boolean compileTest() {
 
         List<String> compileCommands = new ArrayList<>();
         compileCommands.add("javac");
@@ -47,12 +42,5 @@ public class Compiler{
 
         return false;
     }
-
-    public boolean containsJavaFiles(String folderPath){
-        File submissionFile = new File(folderPath);
-        FilenameFilter javaFileFilter = (dir, name) -> name.endsWith(".java");
-        String[] files = submissionFile.list(javaFileFilter);
-        return files.length > 0;
-    }    
 
 }

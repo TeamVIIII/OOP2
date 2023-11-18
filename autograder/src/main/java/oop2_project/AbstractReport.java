@@ -58,9 +58,6 @@ public abstract class AbstractReport implements Report
                 if (markPerTest.containsKey(methodName)) 
                 {
                     this.acquiredMark -= markPerTest.get(methodName);
-                    
-                    reportRecommendations.add(recommendationPerTest.get(methodName));
-                    
                 } 
             }
         }
@@ -99,7 +96,8 @@ public abstract class AbstractReport implements Report
 
         for(String s : reportRecommendations)
         {
-            message = message + s + "\n";
+            message += s += "\n";
+            // System.out.println(message);
         }
         return message;
     }

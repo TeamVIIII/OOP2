@@ -23,7 +23,7 @@ public class CopierTest
     @Test
     public void testEmptyFolder() // shouldn't try to copy items from a file thats empty
     {
-        String emptyFolderPath = "testData/DataToTestCopier/emptyfolder";
+        String emptyFolderPath = "testData/emptyFolder";
 
         boolean result = copier.copyAll(emptyFolderPath);
         assertFalse(result);
@@ -32,7 +32,7 @@ public class CopierTest
     @Test
     public void testFolderMissingItems()    // should only copy items from a file if all items are present
     {
-        String emptyFolderPath = "testData/DataToTestCopier/2Items";
+        String emptyFolderPath = "testData/2Items";
 
         boolean result = copier.copyAll(emptyFolderPath);
         assertFalse(result);
@@ -42,7 +42,7 @@ public class CopierTest
     @Test
     public void testCopyAll()
     {
-        String submissionFolder = "testData/DataToTestCopier/Jardel_Mitchell_816027213_A1";
+        String submissionFolder = "testData/FailingSubmission";
         DeleteClassFiles.deleteFiles();
 
         assertTrue(copier.copyAll(submissionFolder));
