@@ -1,11 +1,10 @@
-package oop2_project;
-
 import org.junit.After;
 import org.junit.Before;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.lang.reflect.*;
 import java.time.LocalDateTime;
+import java.util.jar.Manifest;
 import java.util.ArrayList;
 
 public class LuggageManifestTest 
@@ -267,3 +266,4 @@ public class LuggageManifestTest
         }
     }
 }
+

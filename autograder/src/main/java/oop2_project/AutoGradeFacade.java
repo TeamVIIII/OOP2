@@ -52,15 +52,15 @@ public class AutoGradeFacade implements Facade
     public void generatePDf(OverallReport report, String folderpath)
     {
         String fileName = FileNameExtractor.extractFileName(folderpath);
-
+       
+        
         if(report == null){
             PDFGenerator failedPDF = new PDFGenerator(report);
             failedPDF.generateFailedPDF(folderpath+"/"+fileName+".pdf");
             return;
         }
         
-        ReportGeneratorTemplate pdf = new PDFGenerator(report);
-            
+        ReportGeneratorTemplate pdf = new PDFGenerator(report);   
         pdf.generatePDF(folderpath + "/" + fileName + ".pdf");
     }
 
