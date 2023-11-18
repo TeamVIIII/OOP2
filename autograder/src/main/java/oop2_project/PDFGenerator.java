@@ -1,7 +1,6 @@
 package oop2_project;
 
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import com.itextpdf.text.Document;  

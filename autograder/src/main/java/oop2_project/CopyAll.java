@@ -39,9 +39,11 @@ public class CopyAll extends Copier
         sources.add(folderPath + "/Flight.java");
 
         for(int i = 0; i<4; i++)
+        {
             copyFile(sources.get(i), destinations.get(i));
-
-            return true;
+        }
+        
+        return true;
     }
     
     public boolean isAllFilesContainedInFolder(String folderPath){

@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import java.lang.reflect.*;
 import java.time.LocalDateTime;
-import java.util.jar.Manifest;
 import java.util.ArrayList;
 
 public class LuggageManifestTest 
@@ -14,7 +13,6 @@ public class LuggageManifestTest
     public LuggageManifest luggageManifest;
     private Passenger passenger;
     private Flight flight;
-    private String label;
     private String passportNumber;
 
     @Before
@@ -31,8 +29,6 @@ public class LuggageManifestTest
         String strDate = "1111-11-11T11:11:11";
         LocalDateTime flightDate = LocalDateTime.parse(strDate);
         this.flight = new Flight(flightNo, destination, origin, flightDate);
-
-        this.label = "105";
 
         luggageManifest = new LuggageManifest();
     }
@@ -96,7 +92,7 @@ public class LuggageManifestTest
     @Test
     public void testAddLuggage() throws IllegalAccessException
     {
-        int allowedLuggage = getAllowedLuggage(passenger.getCabinClass(), flight);
+        int allowedLuggage = getAllowedLuggage(passenger.getCabinClass());
         int numLuggage = passenger.getNumLuggage();
         int excessPieces = passenger.getNumLuggage() - allowedLuggage;
         String result = luggageManifest.addLuggage(passenger, flight);
@@ -145,7 +141,7 @@ public class LuggageManifestTest
     @Test
     public void testGetExcessLuggageCost() throws IllegalAccessException
     {
-        int allowed = getAllowedLuggage(passenger.getCabinClass(), flight);
+        int allowed = getAllowedLuggage(passenger.getCabinClass());
         int numPieces = passenger.getNumLuggage();
         int excessPieces = numPieces - allowed;
 
@@ -174,7 +170,7 @@ public class LuggageManifestTest
     @Test
     public void testGetExcessLuggageCostByPassenger()
     {
-        int allowed = getAllowedLuggage(passenger.getCabinClass(), flight);
+        int allowed = getAllowedLuggage(passenger.getCabinClass());
         int numPieces = passenger.getNumLuggage();
         int excessPieces = numPieces - allowed;
         double cost = 0;
@@ -187,9 +183,12 @@ public class LuggageManifestTest
         }
             
         if(numPieces == 0)
+        {
             expected = "No Cost";
+        }
+            
         
-        String x = luggageManifest.addLuggage(passenger,flight);
+        luggageManifest.addLuggage(passenger,flight);
         String result = luggageManifest.getExcessLuggageCostByPassenger(passenger.getPassportNumber());
     
         assertEquals(result, expected);
@@ -200,8 +199,8 @@ public class LuggageManifestTest
     {
         int numLuggages = passenger.getNumLuggage();
         String expected = "LUGGAGE MANIFEST:\n";
-        String x = luggageManifest.addLuggage(passenger,flight);
-        String result = luggageManifest.toString();
+        luggageManifest.addLuggage(passenger,flight);
+        // String result = luggageManifest.toString();
         
         try {
             Field field = LuggageSlip.class.getDeclaredField("luggageSlipIDCounter");
@@ -211,15 +210,11 @@ public class LuggageManifestTest
         
         if(numLuggages > 0)
         {
-            int allowed = getAllowedLuggage(passenger.getCabinClass(), flight);
+            int allowed = getAllowedLuggage(passenger.getCabinClass());
             int excessPieces = numLuggages - allowed;
-            
-            
-            double cost = 0;
 
             if (excessPieces > 0)
             {
-                cost = excessPieces * 35;
                 try
                 {
                     Class<?> clas = luggageManifest.getClass();
@@ -250,21 +245,22 @@ public class LuggageManifestTest
         assertEquals(expected, luggageManifest.toString());
     }    
     
-    private int getAllowedLuggage(char cabinClass, Flight flightInstance) {
-        try {
-            // Attempt to get the method by its name (regardless of whether it's static or non-static)
+    private int getAllowedLuggage(char cabinClass) 
+    {
+        try 
+        {
             Method method = Flight.class.getMethod("getAllowedLuggage", char.class);
-            if (Modifier.isStatic(method.getModifiers())) {
-                // If the method is static, invoke it using the class
+            if (Modifier.isStatic(method.getModifiers())) 
+            {
                 return (int) method.invoke(null, cabinClass);
-            } else {
-                // If the method is non-static, invoke it using the instance
-                return (int) method.invoke(flightInstance, cabinClass);
+            } else 
+            {
+                return (int) method.invoke(cabinClass);
             }
-        } catch (Exception e) {
-            // Handle exceptions or return a default value as needed
-            e.printStackTrace();
-            return -1; // Or any other default value
+        } catch (Exception e) // method was not found
+        {
+            // e.printStackTrace();
+            return -1;
         }
     }
 }
