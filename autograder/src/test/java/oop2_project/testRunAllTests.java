@@ -23,7 +23,4 @@ public class testRunAllTests
         assertEquals(4,results.size());
 
     }
-
-
-    
 }

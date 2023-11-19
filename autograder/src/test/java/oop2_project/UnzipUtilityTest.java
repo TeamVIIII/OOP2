@@ -1,6 +1,7 @@
 package oop2_project;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.File;
@@ -11,7 +12,15 @@ import java.util.zip.ZipInputStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class UnzipUtilityTest {
+public class UnzipUtilityTest 
+{
+    UnzipUtility unzipUtility;
+
+    @Before
+    public void setup()
+    {
+        unzipUtility = new UnzipUtility();
+    }
 
     @Test
     public void testUnzip() throws IOException {
@@ -25,7 +34,7 @@ public class UnzipUtilityTest {
         // Mocking the behavior of fileInputStream to return our mocked ZipInputStream
         when(fileInputStream.read()).thenReturn(-1);
 
-        UnzipUtility unzipUtility = new UnzipUtility();
+        
 
         String zipFilePath = "path/to/zip/file.zip";
         String expectedOutput = new File(zipFilePath).getParent() + File.separator + new File(zipFilePath).getName().replace(".zip", "");
