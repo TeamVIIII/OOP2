@@ -25,7 +25,8 @@ public class AutoGradeFacade implements Facade
         RunTest executer = new RunAllTests();
         OverallReport overallReport;
 
-        if(copier.copyAll(studentFolderPath)){
+        if(copier.copyAll(studentFolderPath))
+        {
             if(compiler.compileTest())
             {
                 List<Result> results = executer.runAll();

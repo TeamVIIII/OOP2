@@ -3,12 +3,14 @@ package oop2_project;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Test;
+import org.junit.Before;
 
 public class CopierTest 
 {
     private CopyAll copier;
     
-    public CopierTest()
+    @Before
+    public void setUp()
     {
         copier = new CopyAll();
     }

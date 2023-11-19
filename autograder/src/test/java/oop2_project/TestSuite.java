@@ -11,7 +11,7 @@ import org.junit.runners.Suite;
         CompilerTest.class, 
         testRunAllTests.class,
         testReports.class,
-        
+        testOverallReport.class
     }
 )
 

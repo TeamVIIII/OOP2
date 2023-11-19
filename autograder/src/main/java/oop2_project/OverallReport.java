@@ -12,6 +12,7 @@ public class OverallReport implements Report
     public Report getReport(int i){
         return allReports.get(i);
     }
+    
     public String getRecommendationByReport(int i){
         String recommended = "";
         recommended = allReports.get(i).recommendationsToString()+"\n";
