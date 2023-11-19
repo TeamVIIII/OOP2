@@ -28,7 +28,7 @@ public class Main {
         { 
             OverallReport overallReport = grade.getReport(folderpath);
 
-            grade.generatePDf(overallReport,folderpath);
+            //grade.generatePDf(overallReport,folderpath);
             grade.delete();
             grade.emptyGarbage();
         }

@@ -64,6 +64,7 @@ public abstract class AbstractReport implements Report
                 } 
             }
         }
+        System.out.println(acquiredMark);
     }
 
     private void setRecommendations(Result r)
