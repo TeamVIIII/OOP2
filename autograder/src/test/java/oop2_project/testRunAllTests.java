@@ -1,17 +1,17 @@
 package oop2_project;
 
 import static org.junit.Assert.*;
-
 import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.Result;
+import org.junit.Before;
 
 public class testRunAllTests 
 {
     private RunTest executer;
 
-    public testRunAllTests()
+    @Before
+    public void setup()
     {
         executer = new RunAllTests();
     }

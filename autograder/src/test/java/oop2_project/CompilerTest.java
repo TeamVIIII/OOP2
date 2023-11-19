@@ -1,16 +1,16 @@
 package oop2_project;
 
 import static org.junit.Assert.*;
-
 import java.io.File;
-
 import org.junit.Test;
+import org.junit.Before;
 
 public class CompilerTest 
 {
     Compiler compiler;
-    
-    public CompilerTest()
+
+    @Before
+    public void setup()
     {
         compiler = new Compiler();
     }

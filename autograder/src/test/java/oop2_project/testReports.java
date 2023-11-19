@@ -5,6 +5,7 @@ import org.junit.runner.Result;
 import static org.junit.Assert.assertEquals;
 import java.util.List;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class testReports
@@ -18,15 +19,15 @@ public class testReports
    private Report luggageSlip;
    private Report luggageManifest;
 
-   
-   public testReports()
+   @Before
+   public void setup()
    {
       executer = new RunAllTests();
       copier = new CopyAll();
       compiler = new Compiler();
-      String perfect = "testData/FailingSubmission";
+      String failing = "testData/FailingSubmission";
 
-      copier.copyAll(perfect);
+      copier.copyAll(failing);
       compiler.compileTest();
       results = executer.runAll();
 
@@ -83,12 +84,14 @@ public class testReports
    public void testLuggageManifestReport()
    {
       assertEquals(20, luggageManifest.getTotalMark());
+      // assertEquals(20, luggageManifest.getAcquiredMark());
       assertEquals(12, luggageManifest.getAcquiredMark());
 
       String s1 = "This method should've iterated through the slips collection calling the toString method of the LuggageSlip class\n";
       String s2 = "This method suppose to taken in a passportNumber and return the excess cost this passenger is required to pay by iterating through the slips collection and checking to see if the passportNumber parsed in equals to the owner's passportNumber of that slip. The method should've then returned label attached to that slip if any, otherwise returned 'No Cost'\n";
 
       String expected = s2 + s1;
+      // String expected = "";
 
       assertEquals(expected, luggageManifest.recommendationsToString());
    }
