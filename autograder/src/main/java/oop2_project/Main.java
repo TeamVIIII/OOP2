@@ -8,18 +8,18 @@ public class Main {
     {
         Facade grade = new AutoGradeFacade();
 
-        String zipFile = "testData/Submission1.zip";
+        // String zipFile = "testData/Submission2.zip";
        
         Scanner cin = new Scanner(System.in);
-        // System.out.print("Enter the filepath of the zipped submissions: ");
+        System.out.print("Enter the filepath of the zipped submissions: ");
 
-        // String zipFile = cin.nextLine();
-        // while(!grade.isValidZipFile(zipFile))
-        // {
-        //     System.out.print("Please enter a valid file that ends in .zip: ");
-        //     zipFile = cin.nextLine();
+        String zipFile = cin.nextLine();
+        while(!grade.isValidZipFile(zipFile))
+        {
+            System.out.print("Please enter a valid file that ends in .zip: ");
+            zipFile = cin.nextLine();
 
-        // }
+        }
         cin.close();
         
         List<String> studentFolders = grade.getSubmissionFolders(zipFile);

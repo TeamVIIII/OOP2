@@ -1,5 +1,6 @@
 package oop2_project;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.Result;
@@ -22,9 +23,9 @@ public class testOverallReport {
         RunTest executer = new RunAllTests();
         Copier copier = new CopyAll();
         Compiler compiler = new Compiler();
-        String failing = "testData/PerfectSubmission";
+        String perfect = "testData/PerfectSubmission";
 
-        copier.copyAll(failing);
+        copier.copyAll(perfect);
         compiler.compileTest();
         List <Result> results = executer.runAll();
         overallReport = new OverallReport();
@@ -33,6 +34,14 @@ public class testOverallReport {
         luggageSlipReport = new LuggageSlipReport(results.get(1)); 
         luggageManifestReport = new LuggageManifestReport(results.get(2)); 
         flightReport = new FlightReport(results.get(3)); 
+    }
+
+    @AfterClass
+    public static void tearDown()
+    {
+        Facade grader = new AutoGradeFacade();
+        grader.delete();
+        grader.resetState();
     }
 
     @Test
