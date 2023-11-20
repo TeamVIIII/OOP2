@@ -15,6 +15,7 @@ import org.junit.runners.Suite;
         GetUnzippedPathsTest.class,
         UnzipUtilityTest.class,
         AutoGradeFacadeTest.class,
+        PDFGeneratorTest.class
     }
 )
 
