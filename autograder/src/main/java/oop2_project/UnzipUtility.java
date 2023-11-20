@@ -31,7 +31,6 @@ public class UnzipUtility {
             e.printStackTrace();
         }
             
-        // System.out.println(destDirectory + File.separator + zipFileName.replace(".zip", ""));
         return destDirectory + File.separator + zipFileName.replace(".zip", "");
     }
 

@@ -7,7 +7,9 @@
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/Flight.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/PassengerTest.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/LuggageSlipTest.java
+/Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/AutoGradeFacade.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/LuggageSlipReport.java
+/Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/DeleteClassFiles.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/Copier.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/LuggageManifest.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/PassengerReport.java
@@ -15,6 +17,7 @@
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/Passenger.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/Report.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/RunAllTests.java
+/Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/Facade.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/LuggageManifestReport.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/Main.java
 /Users/jerrellejohnson/Desktop/OOP2 project/OOP2/autograder/src/main/java/oop2_project/OverallReport.java

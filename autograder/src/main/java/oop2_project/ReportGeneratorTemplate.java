@@ -10,6 +10,4 @@ public abstract class ReportGeneratorTemplate{
 
     protected abstract void generate(String outputPath);
     protected abstract void createTable(Document document);
-    // protected abstract void createDescription(Document document);
-    
 }

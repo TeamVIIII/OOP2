@@ -1,23 +1,28 @@
 package oop2_project;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import org.mockito.Mockito;
 
-
-import java.util.Arrays;
+import java.io.File;
 import java.util.List;
 
 public class AutoGradeFacadeTest {
-    private AutoGradeFacade autoGradeFacade;
+    private Facade autoGradeFacade;
 
     @Before
-    public void setup() {
-    autoGradeFacade = new AutoGradeFacade();
+    public void setup() 
+    {
+        autoGradeFacade = new AutoGradeFacade();
+    }
+
+    @After
+    public void tearDown()
+    {
+        DeleteClassFiles.deleteFiles();
+        Copier copier = new CopyAll();
+        copier.copyAll("requriedFiles");
     }
 
     @Test
@@ -27,68 +32,98 @@ public class AutoGradeFacadeTest {
         assertNotNull(folders);
     }
 
-    //is AssertTue returns java.lang.AssertionError: path/to/test.zip at oop2_project.AutoGradeFacadeTest.testIsValidZip(AutoGradeFacadeTest.java:38)
-
     @Test
     public void testIsValidZip(){
-        String validZipFilePath = "path/to/valid";
+        String validZipFilePath = "testData/FailingSubmission";
         boolean isValid = autoGradeFacade.isValidZipFile(validZipFilePath);
         assertFalse(isValid);
 
-        String invalidZipFilePath = "path/to/test.zip";
+        String invalidZipFilePath = "testData/Submission1.zip";
         isValid = autoGradeFacade.isValidZipFile(invalidZipFilePath);
-        assertTrue("path/to/test.zip" ,isValid);
+        assertTrue(isValid);
 
     }
 
-    //current unknown type Report Java error
     @Test
-    public void testGetReport() {
-        // Arrange
-        String studentFolderPath = "path/to/studentFolder";
-        Copier copier = mock(Copier.class);
-        Compiler compiler = mock(Compiler.class);
-        RunTest executer = mock(RunTest.class);
-        //List<Result> results = Arrays.asList(new Result(), new Result(), new Result(), new Result());
+    public void testGetReport() 
+    {
+        OverallReport report = autoGradeFacade.getReport("testData/emptyFolder");
+        assertNull(report);
 
-        when(copier.copyAll(studentFolderPath)).thenReturn(true);
-        when(compiler.compileTest()).thenReturn(true);
-        //when(executer.runAll()).thenReturn(results);
-
-        // Act
-        OverallReport overallReport = autoGradeFacade.getReport(studentFolderPath);
-
-        // Assert
-        assertNotNull(overallReport);
-        //assertEquals(4, overallReport.getReports().size());
+        report = autoGradeFacade.getReport("testData/FailingSubmission");
     }
 
-    
-
     @Test
-    public void testDelete() {
+    public void testDelete() 
+    {
         autoGradeFacade.delete();
-    // Check if files have been deleted
+        String[] filesToDelete = {
+            "src/main/java/oop2_project/Flight.class",
+            "src/main/java/oop2_project/FlightTest.class",
+            "src/main/java/oop2_project/LuggageManifest.class",
+            "src/main/java/oop2_project/LuggageManifestTest.class",
+            "src/main/java/oop2_project/LuggageSlip.class",
+            "src/main/java/oop2_project/LuggageSlipTest.class",
+            "src/main/java/oop2_project/Passenger.class",
+            "src/main/java/oop2_project/PassengerTest.class",
+            "target/classes/oop2_project/Flight.class",
+            "target/classes/oop2_project/LuggageSlip.class",
+            "target/classes/oop2_project/LuggageManifest.class",
+            "target/classes/oop2_project/Passenger.class",
+
+
+            "src/main/java/oop2_project/Flight.java",
+            "src/main/java/oop2_project/LuggageSlip.java",
+            "src/main/java/oop2_project/LuggageManifest.java",
+            "src/main/java/oop2_project/Passenger.java",
+
+        };
+
+        for (String filePath : filesToDelete) 
+        {
+            File file = new File(filePath);
+            assertFalse(file.exists());
+        }
     }
 
     @Test
-    public void testResetState() {
+    public void testResetState() 
+    {
+        DeleteClassFiles.deleteFiles();
         autoGradeFacade.resetState();
-    // Check if files have been copied
-    }
 
-    @Test
-    public void testEmptyGarbage() {
-        autoGradeFacade.emptyGarbage();
-    // Check if garbage collector has been called
-    }
+        String[] filesToDelete = 
+        {
+            "src/main/java/oop2_project/Flight.java",
+            "src/main/java/oop2_project/LuggageSlip.java",
+            "src/main/java/oop2_project/LuggageManifest.java",
+            "src/main/java/oop2_project/Passenger.java",
+        };
 
+        for (String filePath : filesToDelete) 
+        {
+            File file = new File(filePath);
+            assertTrue(file.exists());
+        }
+    }
+    
     @Test
-    public void testGeneratePDf() {
+    public void testGeneratePDf() 
+    {
         OverallReport report = new OverallReport();
-        String folderPath = "path/to/folder";
+        String folderPath = "testData/PerfectSubmission";
         autoGradeFacade.generatePDf(report, folderPath);
+        String pdfPath = "testData/PerfectSubmission/PerfectSubmission.pdf";
+        File file = new File(pdfPath);
+        assertTrue(file.exists());
+
+
+        // tests for the failed pdf
+        report = null;
+        folderPath = "testData/FailingSubmission";
+        autoGradeFacade.generatePDf(report, folderPath);
+        pdfPath = "testData/FailingSubmission/FailingSubmission.pdf";
+        file = new File(pdfPath);
+        assertTrue(file.exists());
     }
-
-
 }

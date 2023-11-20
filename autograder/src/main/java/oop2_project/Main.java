@@ -16,7 +16,6 @@ public class Main {
         {
             System.out.print("Please enter a valid file that ends in .zip: ");
             zipFile = cin.nextLine();
-
         }
         cin.close();
         
@@ -24,7 +23,7 @@ public class Main {
         grade.delete();
         for(String folderpath : studentFolders)
         { 
-            System.out.println(folderpath);
+            // System.out.println(folderpath);
             OverallReport overallReport = grade.getReport(folderpath);
 
             grade.generatePDf(overallReport,folderpath);

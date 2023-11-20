@@ -14,9 +14,6 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
-//import org.junit.runner.Result;
-//import org.junit.runner.notification.Failure;
-
 public class GetUnzippedPathsTest {
    private GetUnzippedPaths getUnzippedPaths;
 
