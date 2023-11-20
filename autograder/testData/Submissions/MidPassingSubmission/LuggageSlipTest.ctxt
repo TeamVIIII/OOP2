@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=LuggageSlipTest
+comment1.params=
+comment1.target=void\ setup()
+comment2.params=
+comment2.target=void\ testOwner()
+comment3.params=
+comment3.target=void\ tearDown()
+comment4.params=
+comment4.target=void\ testLuggageSlipIDCounter()
+comment5.params=
+comment5.target=void\ testLuggageSlipID()
+comment6.params=
+comment6.target=void\ testLabel()
+comment7.params=
+comment7.target=void\ testNoLabelConstructor()
+comment8.params=
+comment8.target=void\ testLabelConstructor()
+comment9.params=
+comment9.target=void\ testHasOwner()
+numComments=10
